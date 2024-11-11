@@ -15,10 +15,10 @@ import com.devsuperior.dslist.services.GameService;
 
 @RestController
 @RequestMapping(value = "/games")
-@RequiredArgsConstructor
 public class GameController {
 
-    private final GameService gameService;
+    @Autowired
+    private GameService gameService;
 
     @GetMapping(value = "/{id}")
     public GameDTO findById(@PathVariable Long id) {

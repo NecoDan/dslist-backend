@@ -6,8 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Data
 @Builder
 @NoArgsConstructor
@@ -16,11 +14,10 @@ public class GameListDTO {
 
     private Long id;
     private String name;
-    private LocalDateTime creationDate;
+    private String creationDate;
 
-    public GameListDTO(final GameList entity) {
-        this.id = entity.getId();
-        this.name = entity.getName();
-        this.creationDate = entity.getCreatedAt();
+    public GameListDTO(GameList entity) {
+        id = entity.getId();
+        name = entity.getName();
     }
 }

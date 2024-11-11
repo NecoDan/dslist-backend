@@ -3,6 +3,7 @@ package com.devsuperior.dslist.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -32,9 +33,12 @@ public class Game {
     @Column(name = "img_url")
     private String imgUrl;
 
-    @Column(name = "short_description", columnDefinition = "VARCHAR", length = 255)
+    //    @Column(name = "created_at")
+    //    private LocalDateTime createdAt;
+
+    @Column(name = "short_description", columnDefinition = "TEXT")
     private String shortDescription;
 
-    @Column(name = "long_description", columnDefinition = "VARCHAR", length = 255)
+    @Column(name = "long_description", columnDefinition = "TEXT")
     private String longDescription;
 }
