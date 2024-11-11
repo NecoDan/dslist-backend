@@ -152,10 +152,8 @@ void updateBelongingPosition(Long listId, Long gameId, Integer newPosition);
 ### import.sql
 
 ```sql
-INSERT INTO tb_game_list (name)
-VALUES ('Aventura e RPG');
-INSERT INTO tb_game_list (name)
-VALUES ('Jogos de plataforma');
+INSERT INTO tb_game_list (name) VALUES ('Aventura e RPG');
+INSERT INTO tb_game_list (name) VALUES ('Jogos de plataforma');
 
 INSERT INTO tb_game (title, score, game_year, genre, platforms, img_url, short_description, long_description)
 VALUES ('Mass Effect Trilogy', 4.8, 2012, 'Role-playing (RPG), Shooter', 'XBox, Playstation, PC',
@@ -208,30 +206,17 @@ VALUES ('Sonic CD', 4, 1993, 'Platform', 'Sega CD, PC',
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit esse officiis corrupti unde repellat non quibusdam! Id nihil itaque ipsum!',
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus dolorum illum placeat eligendi, quis maiores veniam. Incidunt dolorum, nisi deleniti dicta odit voluptatem nam provident temporibus reprehenderit blanditiis consectetur tenetur. Dignissimos blanditiis quod corporis iste, aliquid perspiciatis architecto quasi tempore ipsam voluptates ea ad distinctio, sapiente qui, amet quidem culpa.');
 
-INSERT INTO tb_belonging (list_id, game_id, position)
-VALUES (1, 1, 0);
-INSERT INTO tb_belonging (list_id, game_id, position)
-VALUES (1, 2, 1);
-INSERT INTO tb_belonging (list_id, game_id, position)
-VALUES (1, 3, 2);
-INSERT INTO tb_belonging (list_id, game_id, position)
-VALUES (1, 4, 3);
-INSERT INTO tb_belonging (list_id, game_id, position)
-VALUES (1, 5, 4);
+INSERT INTO tb_belonging (list_id, game_id, position) VALUES (1, 1, 0);
+INSERT INTO tb_belonging (list_id, game_id, position) VALUES (1, 2, 1);
+INSERT INTO tb_belonging (list_id, game_id, position) VALUES (1, 3, 2);
+INSERT INTO tb_belonging (list_id, game_id, position) VALUES (1, 4, 3);
+INSERT INTO tb_belonging (list_id, game_id, position) VALUES (1, 5, 4);
 
-INSERT INTO tb_belonging (list_id, game_id, position)
-VALUES (2, 6, 0);
-INSERT INTO tb_belonging (list_id, game_id, position)
-VALUES (2, 7, 1);
-INSERT INTO tb_belonging (list_id, game_id, position)
-VALUES (2, 8, 2);
-INSERT INTO tb_belonging (list_id, game_id, position)
-VALUES (2, 9, 3);
-INSERT INTO tb_belonging (list_id, game_id, position)
-VALUES (2, 10, 4);
+INSERT INTO tb_belonging (list_id, game_id, position) VALUES (2, 6, 0);
+INSERT INTO tb_belonging (list_id, game_id, position) VALUES (2, 7, 1);
+INSERT INTO tb_belonging (list_id, game_id, position) VALUES (2, 8, 2);
+INSERT INTO tb_belonging (list_id, game_id, position) VALUES (2, 9, 3);
+INSERT INTO tb_belonging (list_id, game_id, position) VALUES (2, 10, 4);
 ```
 
 ### Script Docker Compose
-
-https://gist.github.com/acenelio/5e40b27cfc40151e36beec1e27c4ff71
-# othes-devs-java
