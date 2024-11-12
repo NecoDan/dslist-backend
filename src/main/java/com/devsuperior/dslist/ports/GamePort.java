@@ -16,4 +16,6 @@ public interface GamePort {
 
     @Transactional(readOnly = true)
     List<GameMinDTO> findByGameList(Long listId);
+
+    List<GameMinDTO> findAllByYearRelease(final Integer year);
 }

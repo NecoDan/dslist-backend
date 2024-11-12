@@ -1,5 +1,6 @@
 package com.devsuperior.dslist.services;
 
+import java.util.Collections;
 import java.util.List;
 
 import com.devsuperior.dslist.ports.GamePort;
@@ -28,12 +29,23 @@ public class GameService implements GamePort {
     @Transactional(readOnly = true)
     @Override
     public List<GameMinDTO> findAll() {
-        return gameRepository.findAll().stream().map(GameMinDTO::new).toList();
+        return gameRepository.findAll()
+                .stream()
+                .map(GameMinDTO::new)
+                .toList();
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<GameMinDTO> findByGameList(Long listId) {
         return gameRepository.searchByList(listId).stream().map(GameMinDTO::new).toList();
+    }
+
+    @Override
+    public List<GameMinDTO> findAllByYearRelease(final Integer year) {
+        return gameRepository.recoveryByYear(year)
+                .stream()
+                .map(GameMinDTO::new)
+                .toList();
     }
 }

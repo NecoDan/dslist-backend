@@ -4,10 +4,7 @@ import java.util.List;
 
 import com.devsuperior.dslist.ports.GamePort;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.devsuperior.dslist.dto.GameDTO;
 import com.devsuperior.dslist.dto.GameMinDTO;
@@ -27,5 +24,11 @@ public class GameController {
     @GetMapping
     public List<GameMinDTO> findAll() {
         return gamePort.findAll();
+    }
+
+
+    @GetMapping(value = "/search")
+    public List<GameMinDTO> findAllByYearRelease(@RequestParam(value = "year", defaultValue = "0") Integer year) {
+        return gamePort.findAllByYearRelease(year);
     }
 }
