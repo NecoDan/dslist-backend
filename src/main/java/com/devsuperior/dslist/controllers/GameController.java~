@@ -1,6 +1,5 @@
 package com.devsuperior.dslist.controllers;
 
-import java.util.Collections;
 import java.util.List;
 
 import com.devsuperior.dslist.ports.GamePort;
@@ -31,9 +30,5 @@ public class GameController {
     @GetMapping(value = "/search")
     public List<GameMinDTO> findAllByYearRelease(@RequestParam(value = "year", defaultValue = "0") Integer year) {
         return gamePort.findAllByYearRelease(year);
-    }
-
-    public List<GameMinDTO> findAllByScore(@RequestParam(value = "min") Double min, @RequestParam(value = "max") Double max) {
-        return Collections.emptyList();
     }
 }
