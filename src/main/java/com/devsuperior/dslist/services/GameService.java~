@@ -22,8 +22,8 @@ public class GameService {
 
     @Transactional(readOnly = true)
     public GameDTO findById(@PathVariable Long listId) {
-        Game result = gameRepository.findById(listId).get();
-        return new GameDTO(result);
+        return new GameDTO(gameRepository.findById(listId)
+                .orElseThrow(() -> new RuntimeException("Game not found")));
     }
 
     @Transactional(readOnly = true)

@@ -2,26 +2,26 @@ package com.devsuperior.dslist.services;
 
 import java.util.List;
 
+import com.devsuperior.dslist.ports.GameListPort;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.dslist.dto.GameListDTO;
-import com.devsuperior.dslist.entities.GameList;
 import com.devsuperior.dslist.projections.GameMinProjection;
 import com.devsuperior.dslist.repositories.GameListRepository;
 import com.devsuperior.dslist.repositories.GameRepository;
 
 @Service
 @RequiredArgsConstructor
-public class GameListService {
+public class GameListService implements GameListPort {
 
     private final GameListRepository gameListRepository;
 
     private final GameRepository gameRepository;
 
     @Transactional(readOnly = true)
+    @Override
     public List<GameListDTO> findAll() {
         return gameListRepository.findAll()
                 .stream()
@@ -30,6 +30,7 @@ public class GameListService {
     }
 
     @Transactional
+    @Override
     public void move(Long listId, int sourceIndex, int destinationIndex) {
 
         List<GameMinProjection> list = gameRepository.searchByList(listId);
@@ -48,6 +49,7 @@ public class GameListService {
     }
 
     @Transactional(readOnly = true)
+    @Override
     public GameListDTO findById(Long id) {
         return new GameListDTO(
                 gameListRepository.findById(id)
