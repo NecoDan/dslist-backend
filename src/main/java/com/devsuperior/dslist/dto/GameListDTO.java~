@@ -17,6 +17,8 @@ import java.util.Objects;
 @AllArgsConstructor
 public class GameListDTO {
 
+    private final static String BR_DATETIME_FORMAT = "dd/MM/yyyy HH:mm:ss";
+
     private Long id;
     private String name;
     private String creationDate;
@@ -32,8 +34,6 @@ public class GameListDTO {
     }
 
     private String formatCreationDateBy(LocalDateTime localDateTime) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(strFormato);
-        return localDateTime.format(formatter);
+        return localDateTime.format(DateTimeFormatter.ofPattern(BR_DATETIME_FORMAT));
     }
-
 }

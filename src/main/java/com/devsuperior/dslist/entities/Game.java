@@ -18,23 +18,23 @@ public class Game {
     @Column(name = "title", columnDefinition = "VARCHAR", length = 255)
     private String title;
 
-	@Column(name = "score")
-	private Double score;
+    @Column(name = "score")
+    private Double score;
 
-	@Column(name = "game_year")
+    @Column(name = "game_year")
     private Integer year;
 
-	@Column(name = "genre")
+    @Column(name = "genre")
     private String genre;
 
-	@Column(name = "platforms")
+    @Column(name = "platforms")
     private String platforms;
 
     @Column(name = "img_url")
     private String imgUrl;
 
-    //    @Column(name = "created_at")
-    //    private LocalDateTime createdAt;
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 
     @Column(name = "short_description", columnDefinition = "TEXT")
     private String shortDescription;
