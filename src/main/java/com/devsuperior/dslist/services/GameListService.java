@@ -23,8 +23,10 @@ public class GameListService {
 
     @Transactional(readOnly = true)
     public List<GameListDTO> findAll() {
-        List<GameList> result = gameListRepository.findAll();
-        return result.stream().map(GameListDTO::new).toList();
+        return gameListRepository.findAll()
+                .stream()
+                .map(GameListDTO::new)
+                .toList();
     }
 
     @Transactional
@@ -35,8 +37,10 @@ public class GameListService {
         GameMinProjection obj = list.remove(sourceIndex);
         list.add(destinationIndex, obj);
 
-        int min = sourceIndex < destinationIndex ? sourceIndex : destinationIndex;
-        int max = sourceIndex < destinationIndex ? destinationIndex : sourceIndex;
+        // int min = sourceIndex < destinationIndex ? sourceIndex : destinationIndex;
+        // int max = sourceIndex < destinationIndex ? destinationIndex : sourceIndex;
+        int min = Math.min(sourceIndex, destinationIndex);
+        int max = Math.max(sourceIndex, destinationIndex);
 
         for (int i = min; i <= max; i++) {
             gameListRepository.updateBelongingPosition(listId, list.get(i).getId(), i);
@@ -45,8 +49,10 @@ public class GameListService {
 
     @Transactional(readOnly = true)
     public GameListDTO findById(Long id) {
-        GameList entity = gameListRepository.findById(id).get();
-        return new GameListDTO(entity);
+        return new GameListDTO(
+                gameListRepository.findById(id)
+                        .orElseThrow(() -> new RuntimeException("GameList not found"))
+        );
     }
 }
 

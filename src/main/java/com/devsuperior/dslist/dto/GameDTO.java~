@@ -3,7 +3,6 @@ package com.devsuperior.dslist.dto;
 import com.devsuperior.dslist.entities.Game;
 import com.devsuperior.dslist.utils.FunctionalUtils;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +16,6 @@ import java.time.format.DateTimeFormatter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonPropertyOrder({"id", "title", "year", "genre", "platforms", "score", "creationDate", "imgUrl", "shortDescription", "longDescription"})
 public class GameDTO {
 
     private Long id;
