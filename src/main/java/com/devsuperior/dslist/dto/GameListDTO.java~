@@ -5,6 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 @Data
 @Builder
@@ -16,8 +21,19 @@ public class GameListDTO {
     private String name;
     private String creationDate;
 
-    public GameListDTO(GameList entity) {
-        id = entity.getId();
-        name = entity.getName();
+    public GameListDTO(final GameList entity) {
+        this.id = entity.getId();
+        this.name = entity.getName();
+        this.creationDate = formatCreationDate(entity.getCreatedAt());
     }
+
+    private String formatCreationDate(LocalDateTime localDateTime) {
+        return (Objects.isNull(localDateTime)) ? StringUtils.EMPTY : formatCreationDateBy(localDateTime);
+    }
+
+    private String formatCreationDateBy(LocalDateTime localDateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(strFormato);
+        return localDateTime.format(formatter);
+    }
+
 }
