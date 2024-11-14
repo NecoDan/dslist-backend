@@ -1,17 +1,17 @@
 package com.devsuperior.dslist.services;
 
-import java.util.Collections;
-import java.util.List;
-
+import com.devsuperior.dslist.dto.GameDTO;
+import com.devsuperior.dslist.dto.GameMinDTO;
+import com.devsuperior.dslist.dto.GameMinReportDTO;
 import com.devsuperior.dslist.ports.GamePort;
+import com.devsuperior.dslist.repositories.GameRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import com.devsuperior.dslist.dto.GameDTO;
-import com.devsuperior.dslist.dto.GameMinDTO;
-import com.devsuperior.dslist.repositories.GameRepository;
+import java.util.Collections;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -38,7 +38,10 @@ public class GameService implements GamePort {
     @Transactional(readOnly = true)
     @Override
     public List<GameMinDTO> findByGameList(Long listId) {
-        return gameRepository.searchByList(listId).stream().map(GameMinDTO::new).toList();
+        return gameRepository.searchByList(listId)
+                .stream()
+                .map(GameMinDTO::new)
+                .toList();
     }
 
     @Override
@@ -46,6 +49,13 @@ public class GameService implements GamePort {
         return gameRepository.recoveryByYear(year)
                 .stream()
                 .map(GameMinDTO::new)
+                .toList();
+    }
+
+    @Override
+    public List<GameMinReportDTO> findAllRankingTopBy(Integer valueTop) {
+        return gameRepository.recoverTopRankingByScoreOrder(valueTop).stream()
+                .map(GameMinReportDTO::new)
                 .toList();
     }
 }

@@ -2,6 +2,7 @@ package com.devsuperior.dslist.ports;
 
 import com.devsuperior.dslist.dto.GameDTO;
 import com.devsuperior.dslist.dto.GameMinDTO;
+import com.devsuperior.dslist.dto.GameMinReportDTO;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -18,4 +19,6 @@ public interface GamePort {
     List<GameMinDTO> findByGameList(Long listId);
 
     List<GameMinDTO> findAllByYearRelease(final Integer year);
+
+    List<GameMinReportDTO> findAllRankingTopBy(final Integer valueTop);
 }
