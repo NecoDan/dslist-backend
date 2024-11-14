@@ -51,7 +51,7 @@ jobs:
       # ficará explicito nos logs de execução aba Actions
       - name: Publish Test Report
         if: ${{ always() }}
-        uses: scacap/action-surefire-report@v4
+        uses: scacap/action-surefire-report@v2
 
       # aqui utilizamos um action para fazer a publicação do relatório de testes, esse relatório pode ser baixado nos detalhes de execução do workflow
       - uses: actions/upload-artifact@v4
