@@ -28,4 +28,7 @@ public interface GameRepository extends JpaRepository<Game, Long> {
 
     @Query(nativeQuery = true, value = "SELECT * FROM tb_game WHERE game_year = :year ORDER BY title")
     List<GameMinProjection> recoveryByYear(Integer year);
+
+    @Query(nativeQuery = true, value = "SELECT * FROM TB_GAME ORDER BY SCORE DESC LIMIT :valueLimitRanking")
+    List<GameMinProjection> recoverTopRankingByScoreOrder(final Integer valueLimitRanking);
 }
