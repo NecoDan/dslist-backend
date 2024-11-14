@@ -1,95 +1,95 @@
-# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
-
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
-name: Continuos Integration
-
-on:
-  push:
-    branches:
-      [ "master" ,"main" ,"develop" ]
-  pull_request:
-    branches:
-      [ "master" ,"main" ,"develop" ]
-
-jobs:
-
-  # `build` é o nome do job
-  build:
-    # nome para exibir no repositório
-    name: Build, Test and Deploy
-
-    # utilizamos uma instância do ubuntu como runner
-    runs-on: ubuntu-latest
-
-    steps:
-      # Checkout the repository to the GitHub Actions runner - clonando a branch
-      # utilizamos a action checkout para fazer o git clone no runner
-      #- uses: actions/checkout@v4
-      - uses: actions/checkout@v2
-
-      # utilizamos a action setup-java para configurar a versão necessária do JDK - 11
-      - name: Set up JDK 11
-        uses: actions/setup-java@v2
-        with:
-          java-version: 11
-          distribution: 'adopt'
-          architecture: x64
-
-      # utilizamos a action setup-java para configurar a versão necessária do JDK - 17
-      #      - name: Set up JDK 17 for x64
-      #        uses: actions/setup-java@v4
-      #        with:
-      #          java-version: '17'
-      #          distribution: 'temurin'
-      #          cache: maven
-      #          architecture: x64
-
-      # aqui podemos configurar um cache para cachear as dependências do projeto,  isso vai permitir que as próximas execuções do workflow sejam mais rápidas
-      # visto que as dependências Jaune estarão disponibilizadas para o runner nota: utilizamos um hash do arquivo POM.xml, então quando o alterarmos,
-      # as dependências são baixadas novamente
-      - name: Cache Maven packages
-        uses: actions/cache@v2
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
-
-      # aqui apenas definimos o commando para executar no runner
-      - name: Maven Test
-        run: mvn test
-
-      # aqui criamos a pasta para armazenar o relatório dos testes
-      - run: mkdir coverage-report && cp -r target/site/jacoco/* coverage-report
-
-      # aqui utilizamos um action para registrar o resultado do teste no nosso workflow, caso ocorra alguma falha em algum teste,
-      # ficará explicito nos logs de execução aba Actions
-      - name: Publish Test Report
-        if: ${{ always() }}
-        uses: scacap/action-surefire-report@v1
-
-      # aqui utilizamos um action para fazer a publicação do relatório de testes, esse relatório pode ser baixado nos detalhes de execução do workflow
-      - uses: actions/upload-artifact@v2
-        with:
-          name: Test Coverage Report
-          path: coverage-report
-
-      # fazemos construção e publicação do artefato construído
-      - name: Maven Build and Publish
-        run: mvn -B deploy
-        env:
-          # com estamos utilizado o Github Artifact, passamos o token do repositório para fazer upload
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # copiamos o artefato construído para uma pasta específica
-      - run: mkdir dist && cp target/*.jar dist
-
-      # aqui fazemos o publicação do artefato para que possa ser baixado nos detalhes de execução do workflow
-      - uses: actions/upload-artifact@v3
-        with:
-          name: Package
-          path: dist
+## This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+## For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+#
+## This workflow uses actions that are not certified by GitHub.
+## They are provided by a third-party and are governed by
+## separate terms of service, privacy policy, and support
+## documentation.
+#
+#name: Continuos Integration
+#
+#on:
+#  push:
+#    branches:
+#      [ "master" ,"main" ,"develop" ]
+#  pull_request:
+#    branches:
+#      [ "master" ,"main" ,"develop" ]
+#
+#jobs:
+#
+#  # `build` é o nome do job
+#  build:
+#    # nome para exibir no repositório
+#    name: Build, Test and Deploy
+#
+#    # utilizamos uma instância do ubuntu como runner
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      # Checkout the repository to the GitHub Actions runner - clonando a branch
+#      # utilizamos a action checkout para fazer o git clone no runner
+#      #- uses: actions/checkout@v4
+#      - uses: actions/checkout@v2
+#
+#      # utilizamos a action setup-java para configurar a versão necessária do JDK - 11
+#      - name: Set up JDK 11
+#        uses: actions/setup-java@v2
+#        with:
+#          java-version: 11
+#          distribution: 'adopt'
+#          architecture: x64
+#
+#      # utilizamos a action setup-java para configurar a versão necessária do JDK - 17
+#      #      - name: Set up JDK 17 for x64
+#      #        uses: actions/setup-java@v4
+#      #        with:
+#      #          java-version: '17'
+#      #          distribution: 'temurin'
+#      #          cache: maven
+#      #          architecture: x64
+#
+#      # aqui podemos configurar um cache para cachear as dependências do projeto,  isso vai permitir que as próximas execuções do workflow sejam mais rápidas
+#      # visto que as dependências Jaune estarão disponibilizadas para o runner nota: utilizamos um hash do arquivo POM.xml, então quando o alterarmos,
+#      # as dependências são baixadas novamente
+#      - name: Cache Maven packages
+#        uses: actions/cache@v2
+#        with:
+#          path: ~/.m2
+#          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+#          restore-keys: ${{ runner.os }}-m2
+#
+#      # aqui apenas definimos o commando para executar no runner
+#      - name: Maven Test
+#        run: mvn test
+#
+#      # aqui criamos a pasta para armazenar o relatório dos testes
+#      - run: mkdir coverage-report && cp -r target/site/jacoco/* coverage-report
+#
+#      # aqui utilizamos um action para registrar o resultado do teste no nosso workflow, caso ocorra alguma falha em algum teste,
+#      # ficará explicito nos logs de execução aba Actions
+#      - name: Publish Test Report
+#        if: ${{ always() }}
+#        uses: scacap/action-surefire-report@v1
+#
+#      # aqui utilizamos um action para fazer a publicação do relatório de testes, esse relatório pode ser baixado nos detalhes de execução do workflow
+#      - uses: actions/upload-artifact@v2
+#        with:
+#          name: Test Coverage Report
+#          path: coverage-report
+#
+#      # fazemos construção e publicação do artefato construído
+#      - name: Maven Build and Publish
+#        run: mvn -B deploy
+#        env:
+#          # com estamos utilizado o Github Artifact, passamos o token do repositório para fazer upload
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#
+#      # copiamos o artefato construído para uma pasta específica
+#      - run: mkdir dist && cp target/*.jar dist
+#
+#      # aqui fazemos o publicação do artefato para que possa ser baixado nos detalhes de execução do workflow
+#      - uses: actions/upload-artifact@v3
+#        with:
+#          name: Package
+#          path: dist
