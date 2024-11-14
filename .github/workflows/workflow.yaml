@@ -89,7 +89,7 @@ jobs:
       - run: mkdir dist && cp target/*.jar dist
 
       # aqui fazemos o publicação do artefato para que possa ser baixado nos detalhes de execução do workflow
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: Package
           path: dist
