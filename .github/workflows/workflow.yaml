@@ -34,7 +34,7 @@ jobs:
       # visto que as dependências Jaune estarão disponibilizadas para o runner nota: utilizamos um hash do arquivo POM.xml, então quando o alterarmos,
       # as dependências são baixadas novamente
       - name: Cache Maven packages
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
@@ -51,10 +51,10 @@ jobs:
       # ficará explicito nos logs de execução aba Actions
       - name: Publish Test Report
         if: ${{ always() }}
-        uses: scacap/action-surefire-report@v1
+        uses: scacap/action-surefire-report@v4
 
       # aqui utilizamos um action para fazer a publicação do relatório de testes, esse relatório pode ser baixado nos detalhes de execução do workflow
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
           name: Test Coverage Report
           path: coverage-report
@@ -70,7 +70,7 @@ jobs:
       - run: mkdir dist && cp target/*.jar dist
 
       # aqui fazemos o publicação do artefato para que possa ser baixado nos detalhes de execução do workflow
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
           name: Package
           path: dist
