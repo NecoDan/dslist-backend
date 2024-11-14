@@ -1,5 +1,5 @@
 ### GERAL ###
-*
+
 !.gitignore
 !.gitattributes
 !README.md
@@ -12,6 +12,10 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
+.mvnw/*
+mvnw*
+*mvnw
+.mvn/*
 
 ### STS ###
 .apt_generated
