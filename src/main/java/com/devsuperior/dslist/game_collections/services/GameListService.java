@@ -1,16 +1,16 @@
-package com.devsuperior.dslist.services;
+package com.devsuperior.dslist.game_collections.services;
 
 import java.util.List;
 
-import com.devsuperior.dslist.ports.GameListPort;
+import com.devsuperior.dslist.game_collections.ports.GameListPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.devsuperior.dslist.dto.GameListDTO;
-import com.devsuperior.dslist.projections.GameMinProjection;
-import com.devsuperior.dslist.repositories.GameListRepository;
-import com.devsuperior.dslist.repositories.GameRepository;
+import com.devsuperior.dslist.game_collections.dto.GameListDTO;
+import com.devsuperior.dslist.game_collections.projections.GameMinProjection;
+import com.devsuperior.dslist.game_collections.repositories.GameListRepository;
+import com.devsuperior.dslist.game_collections.repositories.GameRepository;
 
 @Service
 @RequiredArgsConstructor

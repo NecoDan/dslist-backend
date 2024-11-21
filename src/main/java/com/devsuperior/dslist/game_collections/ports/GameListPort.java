@@ -1,6 +1,6 @@
-package com.devsuperior.dslist.ports;
+package com.devsuperior.dslist.game_collections.ports;
 
-import com.devsuperior.dslist.dto.GameListDTO;
+import com.devsuperior.dslist.game_collections.dto.GameListDTO;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;

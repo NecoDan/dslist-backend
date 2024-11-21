@@ -1,12 +1,10 @@
-package com.devsuperior.dslist.entities;
+package com.devsuperior.dslist.game_collections.entities;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
