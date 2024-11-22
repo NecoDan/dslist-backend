@@ -23,5 +23,4 @@ public interface UserPort {
 
     Page<UserDTO> findAllByNameFor(String name, Pageable pageable);
 
-
 }
