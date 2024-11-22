@@ -1,4 +1,4 @@
-package com.devsuperior.dslist.entities;
+package com.devsuperior.dslist.game_collections.entities;
 
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
@@ -6,7 +6,6 @@ import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 @Embeddable
 @Data

@@ -1,6 +1,6 @@
-package com.devsuperior.dslist.dto;
+package com.devsuperior.dslist.game_collections.dto;
 
-import com.devsuperior.dslist.entities.Game;
+import com.devsuperior.dslist.game_collections.entities.Game;
 import com.devsuperior.dslist.utils.FunctionalUtils;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -9,9 +9,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Data
 @Builder

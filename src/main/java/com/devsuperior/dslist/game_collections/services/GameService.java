@@ -1,16 +1,15 @@
-package com.devsuperior.dslist.services;
+package com.devsuperior.dslist.game_collections.services;
 
-import com.devsuperior.dslist.dto.GameDTO;
-import com.devsuperior.dslist.dto.GameMinDTO;
-import com.devsuperior.dslist.dto.GameMinReportDTO;
-import com.devsuperior.dslist.ports.GamePort;
-import com.devsuperior.dslist.repositories.GameRepository;
+import com.devsuperior.dslist.game_collections.dto.GameDTO;
+import com.devsuperior.dslist.game_collections.dto.GameMinDTO;
+import com.devsuperior.dslist.game_collections.dto.GameMinReportDTO;
+import com.devsuperior.dslist.game_collections.ports.GamePort;
+import com.devsuperior.dslist.game_collections.repositories.GameRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -53,7 +52,7 @@ public class GameService implements GamePort {
     }
 
     @Override
-    public List<GameMinDTO> findAllRankingTopBy(Integer valueTop) {
+    public List<GameMinReportDTO> findAllRankingTopBy(Integer valueTop) {
         return gameRepository.recoverTopRankingByScoreOrder(valueTop).stream()
                 .map(GameMinReportDTO::new)
                 .toList();

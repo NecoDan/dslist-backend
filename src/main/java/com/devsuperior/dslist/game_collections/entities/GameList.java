@@ -1,4 +1,4 @@
-package com.devsuperior.dslist.entities;
+package com.devsuperior.dslist.game_collections.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;

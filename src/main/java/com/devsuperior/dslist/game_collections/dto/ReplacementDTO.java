@@ -1,4 +1,4 @@
-package com.devsuperior.dslist.dto;
+package com.devsuperior.dslist.game_collections.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

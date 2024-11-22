@@ -1,2 +1,0 @@
-package com.devsuperior.dslist.ports;public interface GameListPort {
-}

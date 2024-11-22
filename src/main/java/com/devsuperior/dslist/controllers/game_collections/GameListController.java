@@ -1,9 +1,9 @@
-package com.devsuperior.dslist.controllers;
+package com.devsuperior.dslist.controllers.game_collections;
 
 import java.util.List;
 
-import com.devsuperior.dslist.ports.GameListPort;
-import com.devsuperior.dslist.ports.GamePort;
+import com.devsuperior.dslist.game_collections.ports.GameListPort;
+import com.devsuperior.dslist.game_collections.ports.GamePort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.devsuperior.dslist.dto.GameListDTO;
-import com.devsuperior.dslist.dto.GameMinDTO;
-import com.devsuperior.dslist.dto.ReplacementDTO;
+import com.devsuperior.dslist.game_collections.dto.GameListDTO;
+import com.devsuperior.dslist.game_collections.dto.GameMinDTO;
+import com.devsuperior.dslist.game_collections.dto.ReplacementDTO;
 
 @RestController
 @RequestMapping(value = "/lists")
