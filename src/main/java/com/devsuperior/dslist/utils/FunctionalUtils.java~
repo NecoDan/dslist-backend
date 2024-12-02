@@ -27,8 +27,8 @@ public final class FunctionalUtils {
     public static String formatCreationDateBy(LocalDateTime localDateTime) {
         return localDateTime.format(DateTimeFormatter.ofPattern(BR_DATETIME_FORMAT));
     }
-
-    public static String formatDecimalNumber(BigDecimal numero) {
+    
+    public static String formatarNumero(BigDecimal numero) {
         validateValorNumericoFormatCasasDecimais(numero);
         numero = numero.setScale(2, RoundingMode.HALF_UP);
 
