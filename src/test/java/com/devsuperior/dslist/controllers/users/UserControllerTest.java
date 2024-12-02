@@ -1,7 +1,7 @@
 package com.devsuperior.dslist.controllers.users;
 
-import com.devsuperior.dslist.jpa_usuarios.dto.UserDTO;
-import com.devsuperior.dslist.jpa_usuarios.ports.UserPort;
+import com.devsuperior.dslist.users_jpa.dto.UserDTO;
+import com.devsuperior.dslist.users_jpa.ports.UserPort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

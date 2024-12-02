@@ -1,7 +1,7 @@
 package com.devsuperior.dslist.controllers.users;
 
-import com.devsuperior.dslist.jpa_usuarios.dto.UserDTO;
-import com.devsuperior.dslist.jpa_usuarios.ports.UserPort;
+import com.devsuperior.dslist.users_jpa.dto.UserDTO;
+import com.devsuperior.dslist.users_jpa.ports.UserPort;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;

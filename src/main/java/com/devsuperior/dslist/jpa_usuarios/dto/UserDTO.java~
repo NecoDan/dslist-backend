@@ -1,4 +1,0 @@
-package com.devsuperior.dslist.jpa_usuarios.dto;
-
-public class UserDTO {
-}

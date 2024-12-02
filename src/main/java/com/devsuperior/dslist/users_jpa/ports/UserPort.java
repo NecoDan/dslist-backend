@@ -1,9 +1,8 @@
-package com.devsuperior.dslist.jpa_usuarios.ports;
+package com.devsuperior.dslist.users_jpa.ports;
 
-import com.devsuperior.dslist.jpa_usuarios.dto.UserDTO;
+import com.devsuperior.dslist.users_jpa.dto.UserDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 
 import java.math.BigDecimal;
 import java.util.List;

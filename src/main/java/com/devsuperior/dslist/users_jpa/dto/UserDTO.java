@@ -1,7 +1,7 @@
-package com.devsuperior.dslist.jpa_usuarios.dto;
+package com.devsuperior.dslist.users_jpa.dto;
 
 
-import com.devsuperior.dslist.jpa_usuarios.entities.User;
+import com.devsuperior.dslist.users_jpa.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

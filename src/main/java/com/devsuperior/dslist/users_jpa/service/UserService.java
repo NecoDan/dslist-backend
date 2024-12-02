@@ -1,8 +1,8 @@
-package com.devsuperior.dslist.jpa_usuarios.service;
+package com.devsuperior.dslist.users_jpa.service;
 
-import com.devsuperior.dslist.jpa_usuarios.dto.UserDTO;
-import com.devsuperior.dslist.jpa_usuarios.ports.UserPort;
-import com.devsuperior.dslist.jpa_usuarios.repository.UserRepository;
+import com.devsuperior.dslist.users_jpa.dto.UserDTO;
+import com.devsuperior.dslist.users_jpa.ports.UserPort;
+import com.devsuperior.dslist.users_jpa.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

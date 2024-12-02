@@ -23,6 +23,7 @@ INSERT INTO tb_belonging (list_id, game_id, position) VALUES (2, 7, 1);
 INSERT INTO tb_belonging (list_id, game_id, position) VALUES (2, 8, 2);
 INSERT INTO tb_belonging (list_id, game_id, position) VALUES (2, 9, 3);
 INSERT INTO tb_belonging (list_id, game_id, position) VALUES (2, 10, 4);
+
 -- ###########################################################################################################################################################################
 -- ############## users - scipts sql:
 INSERT INTO tb_users (password, name, email, salary) VALUES (random_uuid(),'Maria','maria@gmail.com',1348.74);
@@ -50,3 +51,5 @@ INSERT INTO tb_users (password, name, email, salary) VALUES (random_uuid(),'Nata
 INSERT INTO tb_users (password, name, email, salary) VALUES (random_uuid(),'Meire','meire@gmail.com',3553.40);
 INSERT INTO tb_users (password, name, email, salary) VALUES (random_uuid(),'Ana Carolina','ana@gmail.com',1404.28);
 INSERT INTO tb_users (password, name, email, salary) VALUES (random_uuid(),'Filipe','filipe@gmail.com',3388.73);
+
+-- ###########################################################################################################################################################################

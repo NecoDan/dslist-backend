@@ -1,4 +1,4 @@
-package com.devsuperior.dslist.jpa_usuarios.entities;
+package com.devsuperior.dslist.users_jpa.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

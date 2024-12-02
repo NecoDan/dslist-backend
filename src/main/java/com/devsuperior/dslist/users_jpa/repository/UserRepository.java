@@ -1,6 +1,6 @@
-package com.devsuperior.dslist.jpa_usuarios.repository;
+package com.devsuperior.dslist.users_jpa.repository;
 
-import com.devsuperior.dslist.jpa_usuarios.entities.User;
+import com.devsuperior.dslist.users_jpa.entities.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
