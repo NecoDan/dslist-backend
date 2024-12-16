@@ -1,24 +1,19 @@
-package com.devsuperior.dslist.taxes.service.delivery;
+package com.devsuperior.dslist.taxes.services.delivery;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@ExtendWith(MockitoExtension.class)
-class PayDeliveryServiceTest {
 
-    @InjectMocks private PayDeliveryService payDeliveryServiceMock;
+class PayDeliveryServiceV2Test {
 
-    private PayDeliveryService payDeliveryService;
+    private PayDeliveryService payDeliveryServiceVar;
 
     @BeforeEach
     void setUp() {
-        this.payDeliveryService = new PayDeliveryService(new TaxService(), new DeliveryService());
+        this.payDeliveryServiceVar = new PayDeliveryService(new TaxService(), new DeliveryService());
     }
 
     @AfterEach
@@ -26,13 +21,8 @@ class PayDeliveryServiceTest {
     }
 
     @Test
-    void isValidPayDeliveryServiceMock() {
-        assertNotNull(this.payDeliveryServiceMock);
-    }
-
-    @Test
     void isValidPayDeliveryService() {
-        assertNotNull(this.payDeliveryService);
+        assertNotNull(this.payDeliveryServiceVar);
     }
 
     @Test
@@ -42,7 +32,7 @@ class PayDeliveryServiceTest {
         final double expectedValue = 350.0;
 
         // -- 02_Ação
-        final double scValueResult = payDeliveryService.price(purchaseOrderValue, "SC");
+        final double scValueResult = payDeliveryServiceVar.price(purchaseOrderValue, "SC");
 
         // -- 03_Verificação_Validação
         assertTrue(scValueResult > 0);
@@ -57,7 +47,7 @@ class PayDeliveryServiceTest {
         final double expectedValue = 340.0;
 
         // -- 02_Ação
-        final double scValueResult = payDeliveryService.price(purchaseOrderValue, "SP");
+        final double scValueResult = payDeliveryServiceVar.price(purchaseOrderValue, "SP");
 
         // -- 03_Verificação_Validação
         assertTrue(scValueResult > 0);

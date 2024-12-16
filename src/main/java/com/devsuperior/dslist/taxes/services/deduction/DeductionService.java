@@ -1,4 +1,4 @@
-package com.devsuperior.dslist.taxes.service.deduction;
+package com.devsuperior.dslist.taxes.services.deduction;
 
 import java.math.BigDecimal;
 

@@ -1,4 +1,4 @@
-package com.devsuperior.dslist.taxes.service.delivery;
+package com.devsuperior.dslist.taxes.services.delivery;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;

@@ -1,19 +1,19 @@
-package com.devsuperior.dslist.taxes.service.deduction.states;
+package com.devsuperior.dslist.taxes.services.deduction.states;
 
-import com.devsuperior.dslist.taxes.service.deduction.DeductionService;
+import com.devsuperior.dslist.taxes.services.deduction.DeductionService;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.Objects;
 
 @Service
-public class SPDeductionService implements DeductionService {
+public class MGDeductionService implements DeductionService {
 
-    private static final double VALUE_RATE_TAX_STATE_SP = 0.10;
+    private static final double VALUE_RATE_TAX_STATE_MG = 0.12;
 
     @Override
     public double deduction(double amount) {
-        return amount * VALUE_RATE_TAX_STATE_SP;
+        return amount * VALUE_RATE_TAX_STATE_MG;
     }
 
     @Override

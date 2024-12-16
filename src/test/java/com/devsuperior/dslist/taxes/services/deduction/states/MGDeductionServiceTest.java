@@ -1,4 +1,4 @@
-package com.devsuperior.dslist.taxes.service.deduction.states;
+package com.devsuperior.dslist.taxes.services.deduction.states;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

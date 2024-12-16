@@ -1,12 +1,16 @@
-package com.devsuperior.dslist.taxes.service.delivery;
+package com.devsuperior.dslist.taxes.services.delivery;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PayDeliveryService {
 
-    private TaxService taxService;
-    private DeliveryService deliveryService;
+    @Autowired
+    TaxService taxService;
+
+    @Autowired
+    DeliveryService deliveryService;
 
     public PayDeliveryService(TaxService taxService, DeliveryService deliveryService) {
         this.taxService = taxService;
@@ -16,7 +20,6 @@ public class PayDeliveryService {
     public double price(double productValue, String state) {
         final double deliveryValue = deliveryService.fee(state);
         final double taxValue = taxService.performTaxCalculation(productValue);
-
         return productValue + deliveryValue + taxValue;
     }
 }
