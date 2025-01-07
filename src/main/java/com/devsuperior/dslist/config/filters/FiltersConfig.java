@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 // Desabilitando temporiaramente!!! Dando erro!!! Testar o motivo pelo qual tá quebrando a aplicação em outro momento
-//@Configuration
+@Configuration
 public class FiltersConfig {
 
     private static final String URL_FILTER = "/games/*";
