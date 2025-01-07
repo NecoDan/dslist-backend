@@ -6,6 +6,9 @@ import java.util.List;
 import com.devsuperior.dslist.game_collections.dto.GameMinReportDTO;
 import com.devsuperior.dslist.game_collections.ports.GamePort;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.web.bind.annotation.*;
 
 import com.devsuperior.dslist.game_collections.dto.GameDTO;
@@ -19,6 +22,25 @@ public class GameController {
     private final GamePort gamePort;
 
     @GetMapping(value = "/{id}")
+    @Caching(
+            cacheable = {
+                    @Cacheable(
+                            cacheNames = "games",
+                            cacheManager = "cacheManager2Minutes",
+                            key = "#id"
+                    )
+            },
+            evict = {
+                    @CacheEvict(
+                            cacheNames = "gamesList",
+                            allEntries = true
+                    ),
+                    @CacheEvict(
+                            cacheNames = "gamesMin",
+                            allEntries = true
+                    ),
+            }
+    )
     public GameDTO findById(@PathVariable Long id) {
         return gamePort.findById(id);
     }

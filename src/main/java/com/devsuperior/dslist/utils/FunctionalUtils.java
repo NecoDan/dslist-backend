@@ -28,15 +28,19 @@ public final class FunctionalUtils {
         return localDateTime.format(DateTimeFormatter.ofPattern(BR_DATETIME_FORMAT));
     }
 
-    public static String formatDecimalNumber(BigDecimal numero) {
-        validateValorNumericoFormatCasasDecimais(numero);
-        numero = numero.setScale(2, RoundingMode.HALF_UP);
+    public static String formatDecimalNumberBy(Double value) {
+        return formatDecimalNumber(BigDecimal.valueOf(value));
+    }
 
-        DecimalFormatSymbols symbols = new DecimalFormatSymbols(PT_BR);
+    public static String formatDecimalNumber(BigDecimal value) {
+        validateValorNumericoFormatCasasDecimais(value);
+        value = value.setScale(2, RoundingMode.HALF_UP);
+
+        var symbols = new DecimalFormatSymbols(PT_BR);
         symbols.setDecimalSeparator('.');
 
-        DecimalFormat format = new DecimalFormat("##0.00", symbols);
-        return format.format(numero);
+        var format = new DecimalFormat("##0.00", symbols);
+        return format.format(value);
     }
 
     private static void validateValorNumericoFormatCasasDecimais(BigDecimal number) {
