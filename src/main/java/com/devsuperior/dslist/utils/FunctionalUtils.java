@@ -36,10 +36,10 @@ public final class FunctionalUtils {
         validateValorNumericoFormatCasasDecimais(value);
         value = value.setScale(2, RoundingMode.HALF_UP);
 
-        DecimalFormatSymbols symbols = new DecimalFormatSymbols(PT_BR);
+        var symbols = new DecimalFormatSymbols(PT_BR);
         symbols.setDecimalSeparator('.');
 
-        DecimalFormat format = new DecimalFormat("##0.00", symbols);
+        var format = new DecimalFormat("##0.00", symbols);
         return format.format(value);
     }
 
