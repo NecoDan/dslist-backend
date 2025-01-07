@@ -10,12 +10,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
+import java.io.Serializable;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonPropertyOrder({"id", "title", "year", "genre", "platforms", "score", "creationDate", "imgUrl", "shortDescription", "longDescription"})
-public class GameDTO {
+public class GameDTO implements Serializable {
 
     private Long id;
     private String title;
