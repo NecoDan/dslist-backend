@@ -4,7 +4,7 @@ import com.devsuperior.dslist.game_collections.dto.GameDTO;
 import com.devsuperior.dslist.game_collections.dto.GameMinDTO;
 import com.devsuperior.dslist.game_collections.dto.GameMinReportDTO;
 import com.devsuperior.dslist.game_collections.ports.GamePort;
-import com.devsuperior.dslist.game_collections.repositories.GameRepository;
+import com.devsuperior.dslist.game_collections.repository.GameRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
