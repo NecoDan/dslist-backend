@@ -4,18 +4,21 @@ package com.devsuperior.dslist.picpay_challenge.biz;
 import com.devsuperior.dslist.picpay_challenge.domain.User;
 import com.devsuperior.dslist.picpay_challenge.domain.UserTypeDomain;
 import com.devsuperior.dslist.picpay_challenge.entities.user.UserEntity;
+import com.devsuperior.dslist.picpay_challenge.ports.UserPicPayPort;
 import com.devsuperior.dslist.picpay_challenge.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service("UserPicPayBusiness")
 @RequiredArgsConstructor
-public class UserBusiness {
+public class UserBusiness implements UserPicPayPort {
 
     private final UserRepository userRepository;
 
+    @Override
     public void validateTransaction(User userSender, BigDecimal amount) throws Exception {
 
         if (userSender.getUserType() == UserTypeDomain.MERCHANT) {
@@ -27,6 +30,15 @@ public class UserBusiness {
         }
     }
 
+    @Override
+    public List<User> getAll(){
+        return this.userRepository.findAll()
+                .stream()
+                .map(User::new)
+                .toList();
+    }
+
+    @Override
     public User findUserById(Long id) throws Exception {
 
         return new User(this.userRepository.findById(id)
@@ -36,8 +48,16 @@ public class UserBusiness {
         );
     }
 
+    @Override
+    public User createUser(User user) {
+        UserEntity userEntity = new UserEntity(user);
+        this.userRepository.saveAndFlush(userEntity);
+        return new User(userEntity);
+    }
+
+    @Override
     public void saveUser(User user) {
-        this.userRepository.save(new UserEntity(user));
+        this.userRepository.saveAndFlush(new UserEntity(user));
     }
 
 }

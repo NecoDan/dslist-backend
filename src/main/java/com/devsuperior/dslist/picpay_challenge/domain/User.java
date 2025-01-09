@@ -1,5 +1,7 @@
 package com.devsuperior.dslist.picpay_challenge.domain;
 
+import com.devsuperior.dslist.picpay_challenge.dto.internal.UserDTO;
+import com.devsuperior.dslist.picpay_challenge.dto.request.UserRequestDTO;
 import com.devsuperior.dslist.picpay_challenge.entities.user.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,6 +28,14 @@ public class User implements Serializable {
     private UserTypeDomain userType;
 
     public User(UserEntity entity) {
+        BeanUtils.copyProperties(entity, this);
+    }
+
+    public User(UserDTO entity) {
+        BeanUtils.copyProperties(entity, this);
+    }
+
+    public User(UserRequestDTO entity){
         BeanUtils.copyProperties(entity, this);
     }
 }

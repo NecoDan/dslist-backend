@@ -43,6 +43,11 @@ public final class FunctionalUtils {
         return format.format(value);
     }
 
+    public static String formatCpf(String cpf){
+        cpf = cpf.replaceAll("[^0-9]", ""); // Remover caracteres não numéricos
+        return cpf.replaceAll("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
+    }
+
     private static void validateValorNumericoFormatCasasDecimais(BigDecimal number) {
         if (Objects.isNull(number))
             throw new IllegalArgumentException("Valor numerico encontra-se inválido e/ou inexsitente.");
