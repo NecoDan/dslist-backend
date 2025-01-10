@@ -1,3 +1,4 @@
+-- ###########################################################################################################################################################################
 -- ############## games collections - scipts sql:
 INSERT INTO tb_game_list (name, created_at) VALUES ('Aventura e RPG', CURRENT_TIMESTAMP());
 INSERT INTO tb_game_list (name, created_at) VALUES ('Jogos de plataforma', CURRENT_TIMESTAMP());

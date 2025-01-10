@@ -9,8 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.dslist.game_collections.dto.GameListDTO;
 import com.devsuperior.dslist.game_collections.projections.GameMinProjection;
-import com.devsuperior.dslist.game_collections.repositories.GameListRepository;
-import com.devsuperior.dslist.game_collections.repositories.GameRepository;
+import com.devsuperior.dslist.game_collections.repository.GameListRepository;
+import com.devsuperior.dslist.game_collections.repository.GameRepository;
 
 @Service
 @RequiredArgsConstructor
