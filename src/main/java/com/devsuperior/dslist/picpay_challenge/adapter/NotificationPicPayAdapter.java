@@ -26,6 +26,7 @@ public class NotificationPicPayAdapter implements NotificationPicPayPort {
 
     private final RestTemplate restTemplate;
 
+    @Override
     public void sendNotification(User user, String message){
         final var email = user.getEmail();
         final var notificationRequest = new NotificationDTO(email, message);

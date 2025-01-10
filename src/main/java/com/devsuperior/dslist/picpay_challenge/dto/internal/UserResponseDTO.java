@@ -14,7 +14,7 @@ import org.springframework.beans.BeanUtils;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserDTO {
+public class UserResponseDTO {
 
     @JsonProperty("codigo")
     private Long id;
@@ -40,7 +40,7 @@ public class UserDTO {
     @JsonProperty("tipo")
     private UserTypeDomain userType;
 
-    public UserDTO(User entity) {
+    public UserResponseDTO(User entity) {
         BeanUtils.copyProperties(entity, this);
         this.balance = FunctionalUtils.formatDecimalNumber(entity.getBalance());
     }

@@ -6,6 +6,7 @@ import com.devsuperior.dslist.picpay_challenge.dto.external.AuthorizationDTO;
 import com.devsuperior.dslist.picpay_challenge.dto.internal.TransactionDTO;
 import com.devsuperior.dslist.picpay_challenge.entities.transaction.TransactionEntity;
 import com.devsuperior.dslist.picpay_challenge.ports.AuthorizationPicPayPort;
+import com.devsuperior.dslist.picpay_challenge.ports.NotificationPicPayPort;
 import com.devsuperior.dslist.picpay_challenge.ports.TransactionPicPayPort;
 import com.devsuperior.dslist.picpay_challenge.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,9 +24,10 @@ public class TransactionBusiness implements TransactionPicPayPort {
     private final TransactionRepository transactionRepository;
     private final AuthorizationPicPayPort authorizationPicPayPort;
     private final BalanceManagerBusiness balanceManagerBusiness;
+    private final NotificationPicPayPort notificationPicPayPort;
 
     @Override
-    public void createTransaction(TransactionDTO transactionDTO) throws Exception {
+    public Transaction createTransaction(TransactionDTO transactionDTO) throws Exception {
         User userSender = this.userBusiness.findUserById(transactionDTO.senderId());
         User userReceiver = this.userBusiness.findUserById(transactionDTO.receiverId());
 
@@ -36,18 +38,23 @@ public class TransactionBusiness implements TransactionPicPayPort {
             throw new Exception("Transação não autorizada!");
         }
 
-        this.transactionRepository.save(new TransactionEntity(
-                        Transaction.builder()
-                                .amount(transactionValue)
-                                .receiver(userReceiver)
-                                .sender(userSender)
-                                .createdAt(LocalDateTime.now())
-                                .build()
-                )
+        TransactionEntity transactionEntity = new TransactionEntity(
+                Transaction.builder()
+                        .amount(transactionValue)
+                        .receiver(userReceiver)
+                        .sender(userSender)
+                        .createdAt(LocalDateTime.now())
+                        .build()
         );
 
+        transactionRepository.save(transactionEntity);
         balanceManagerBusiness.updateSenderUserBalance(userSender, transactionValue);
         balanceManagerBusiness.updateReceiverUserBalance(userReceiver, transactionValue);
+
+        notificationPicPayPort.sendNotification(userSender, "Transação realizada com sucesso.");
+        notificationPicPayPort.sendNotification(userReceiver, "Você recebeu uma transferência.");
+
+        return new Transaction(transactionEntity);
     }
 
     public boolean isAuthorizedTransaction(User userSender, BigDecimal value) throws Exception {

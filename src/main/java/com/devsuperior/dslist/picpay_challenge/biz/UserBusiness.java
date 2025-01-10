@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 
 @Service("UserPicPayBusiness")
 @RequiredArgsConstructor
@@ -31,7 +32,7 @@ public class UserBusiness implements UserPicPayPort {
     }
 
     @Override
-    public List<User> getAll(){
+    public List<User> getAll() {
         return this.userRepository.findAll()
                 .stream()
                 .map(User::new)
@@ -39,25 +40,34 @@ public class UserBusiness implements UserPicPayPort {
     }
 
     @Override
-    public User findUserById(Long id) throws Exception {
+    public User findUserById(Long id) {
 
         return new User(this.userRepository.findById(id)
                 .orElseThrow(() ->
-                        new Exception("Usuário não encontrado!")
+                        new IllegalStateException("Usuário não encontrado!")
                 )
         );
     }
 
     @Override
     public User createUser(User user) {
+        if (isValidUserId(user)){
+            return findUserById(user.getId());
+        }
+
         UserEntity userEntity = new UserEntity(user);
         this.userRepository.saveAndFlush(userEntity);
+
         return new User(userEntity);
     }
 
     @Override
     public void saveUser(User user) {
         this.userRepository.saveAndFlush(new UserEntity(user));
+    }
+
+    private boolean isValidUserId(User user) {
+        return (Objects.nonNull(user) && Objects.nonNull(user.getId()) && user.getId() > BigDecimal.ZERO.intValue());
     }
 
 }

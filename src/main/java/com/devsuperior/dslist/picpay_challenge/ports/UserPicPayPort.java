@@ -10,7 +10,7 @@ public interface UserPicPayPort {
 
     List<User> getAll();
 
-    User findUserById(Long id) throws Exception;
+    User findUserById(Long id);
 
     User createUser(User user);
 
