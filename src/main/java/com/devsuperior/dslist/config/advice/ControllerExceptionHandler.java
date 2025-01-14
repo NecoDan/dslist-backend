@@ -15,7 +15,7 @@ public class ControllerExceptionHandler {
 
         return ResponseEntity.badRequest()
                 .body(ExceptionHandlerDTO.builder()
-                        .message("Usuário já possui cadastro.")
+                        .message(String.format("Erro ao cadastrar usuário ou usuário já cadastrado: %s.", exception.getMessage()))
                         .httpStatus(HttpStatus.BAD_REQUEST)
                         .build()
                 );

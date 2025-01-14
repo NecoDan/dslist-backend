@@ -10,7 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "tb_belonging")
+@Table(name = "tb_belonging", schema = "dslistapp")
 @Getter
 @Setter
 @EqualsAndHashCode
