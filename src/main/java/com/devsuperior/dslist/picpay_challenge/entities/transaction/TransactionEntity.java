@@ -38,5 +38,7 @@ public class TransactionEntity implements Serializable {
 
     public TransactionEntity(Transaction entity){
         BeanUtils.copyProperties(entity, this);
+        this.sender = new UserEntity(entity.getSender());
+        this.receiver = new UserEntity(entity.getReceiver());
     }
 }

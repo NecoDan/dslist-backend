@@ -11,6 +11,7 @@ import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -26,6 +27,7 @@ public class User implements Serializable {
     private String password;
     private BigDecimal balance;
     private UserTypeDomain userType;
+    private LocalDateTime createdAt;
 
     public User(UserEntity entity) {
         BeanUtils.copyProperties(entity, this);

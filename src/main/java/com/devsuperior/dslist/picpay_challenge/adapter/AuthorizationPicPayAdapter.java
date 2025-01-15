@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -32,11 +33,13 @@ public class AuthorizationPicPayAdapter implements AuthorizationPicPayPort {
     @Override
     public Optional<AuthorizationDTO> getAuthorizationTransaction() {
 
-        var url = URI.create(uriApiPicPay.concat(PATH_TRANSACTION_AUTHORIZATION)).getPath();
+        var uri = uriApiPicPay + PATH_TRANSACTION_AUTHORIZATION;
+        var url = URI.create(uri);
         ResponseEntity<DataAuthorizationDTO> response = restTemplate.getForEntity(url, DataAuthorizationDTO.class);
 
-        if (response.getStatusCode() != HttpStatus.OK)
-            throw validate();
+        if (response.getStatusCode() != HttpStatus.OK){
+            throw validate(response.getStatusCode());
+        }
 
         return Optional.of(Objects.requireNonNull(response.getBody()).getData());
     }
@@ -45,15 +48,17 @@ public class AuthorizationPicPayAdapter implements AuthorizationPicPayPort {
     public Optional<AuthorizationDTO> getAuthorizationTransactionBy() {
 
         var uri = URI.create(uriApiPicPay.concat(PATH_TRANSACTION_AUTHORIZATION));
-        final Optional<DataAuthorizationDTO> optionalDtAuthorization = Optional.ofNullable(
-                restTemplate.getForObject(uri, DataAuthorizationDTO.class)
-        );
+        ResponseEntity<DataAuthorizationDTO> response = restTemplate.getForEntity(uri, DataAuthorizationDTO.class);
 
-        return Optional.of(optionalDtAuthorization.orElseThrow(this::validate).getData());
+        if (response.getStatusCode() != HttpStatus.OK)
+            throw validate(response.getStatusCode());
+
+        return Optional.of(Objects.requireNonNull(response.getBody()).getData());
     }
 
-    private InvalidDataAccessApiUsageException validate() {
-        var errorMessage = "Falha ao obter dados autorização da transação API PicPay.";
+    private InvalidDataAccessApiUsageException validate(HttpStatusCode httpStatus) {
+
+        final var errorMessage = String.format("Falha ao obter dados autorização da transação API PicPay - [%s].", httpStatus.toString());
         log.error(errorMessage);
 
         throw new InvalidDataAccessApiUsageException(errorMessage);

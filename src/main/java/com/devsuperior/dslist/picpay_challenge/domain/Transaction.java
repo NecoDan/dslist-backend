@@ -1,6 +1,5 @@
 package com.devsuperior.dslist.picpay_challenge.domain;
 
-import com.devsuperior.dslist.picpay_challenge.dto.internal.TransactionDTO;
 import com.devsuperior.dslist.picpay_challenge.entities.transaction.TransactionEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,5 +24,7 @@ public class Transaction implements Serializable {
 
     public Transaction(TransactionEntity entity){
         BeanUtils.copyProperties(entity, this);
+        this.sender = new User(entity.getSender());
+        this.receiver = new User(entity.getReceiver());
     }
 }

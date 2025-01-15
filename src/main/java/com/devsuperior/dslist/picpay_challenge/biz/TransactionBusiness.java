@@ -12,9 +12,11 @@ import com.devsuperior.dslist.picpay_challenge.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service("TransactionPicPayBusiness")
 @RequiredArgsConstructor
@@ -27,6 +29,7 @@ public class TransactionBusiness implements TransactionPicPayPort {
     private final NotificationPicPayPort notificationPicPayPort;
 
     @Override
+    @Transactional
     public Transaction createTransaction(TransactionDTO transactionDTO) throws Exception {
         User userSender = this.userBusiness.findUserById(transactionDTO.senderId());
         User userReceiver = this.userBusiness.findUserById(transactionDTO.receiverId());
@@ -57,8 +60,16 @@ public class TransactionBusiness implements TransactionPicPayPort {
         return new Transaction(transactionEntity);
     }
 
+    @Override
+    public List<Transaction> getAllTransactions(){
+        return this.transactionRepository.findAll()
+                .stream()
+                .map(Transaction::new)
+                .toList();
+    }
+
     public boolean isAuthorizedTransaction(User userSender, BigDecimal value) throws Exception {
-        final AuthorizationDTO authorizationDTO = authorizationPicPayPort.getAuthorizationTransaction()
+        final AuthorizationDTO authorizationDTO = authorizationPicPayPort.getAuthorizationTransactionBy()
                 .orElseThrow(() ->
                         new InvalidDataAccessApiUsageException("Falha ao obter dados autorização da transação API PicPay."));
 

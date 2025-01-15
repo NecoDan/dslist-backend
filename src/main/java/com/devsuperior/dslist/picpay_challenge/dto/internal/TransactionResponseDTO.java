@@ -7,11 +7,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,7 +25,7 @@ public class TransactionResponseDTO implements Serializable {
     private Long id;
 
     @JsonProperty("valor")
-    private BigDecimal amount;
+    private String amount;
 
     @JsonProperty("usuarioEnvio")
     private UserResponseDTO sender;
@@ -32,15 +34,18 @@ public class TransactionResponseDTO implements Serializable {
     private UserResponseDTO receiver;
 
     @JsonProperty("dataTransacao")
-    private LocalDateTime createdAt;
+    private String createdAt;
 
     @JsonProperty("mensagem")
     private String message;
 
     public TransactionResponseDTO(Transaction entity){
         BeanUtils.copyProperties(entity, this);
+
+        this.amount = FunctionalUtils.formatDecimalNumber(entity.getAmount());
         this.sender = new UserResponseDTO(entity.getSender());
         this.receiver = new UserResponseDTO(entity.getReceiver());
+        this.createdAt = Objects.isNull(entity.getCreatedAt()) ? StringUtils.EMPTY : FunctionalUtils.formatCreationDate(entity.getCreatedAt());
     }
 
     public TransactionResponseDTO createMessageSucess(){

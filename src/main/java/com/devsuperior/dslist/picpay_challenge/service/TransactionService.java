@@ -18,7 +18,10 @@ public class TransactionService {
     private final TransactionPicPayPort transactionPicPayPort;
 
     public List<TransactionResponseDTO> getAll() {
-        return Collections.emptyList();
+        return transactionPicPayPort.getAllTransactions()
+                .stream()
+                .map(TransactionResponseDTO::new)
+                .toList();
     }
 
     public TransactionResponseDTO createTransaction(TransactionRequestDTO transactionDTO) throws Exception {
