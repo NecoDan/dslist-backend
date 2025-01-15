@@ -68,6 +68,15 @@ public class TransactionBusiness implements TransactionPicPayPort {
                 .toList();
     }
 
+    @Override
+    public Transaction getById(Long id) {
+        return new Transaction(this.transactionRepository.findById(id)
+                .orElseThrow(() ->
+                        new IllegalStateException("Transadção não localizada!")
+                )
+        );
+    }
+
     public boolean isAuthorizedTransaction(User userSender, BigDecimal value) throws Exception {
         final AuthorizationDTO authorizationDTO = authorizationPicPayPort.getAuthorizationTransactionBy()
                 .orElseThrow(() ->

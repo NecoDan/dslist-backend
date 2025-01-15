@@ -8,7 +8,6 @@ import com.devsuperior.dslist.picpay_challenge.ports.TransactionPicPayPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -30,5 +29,9 @@ public class TransactionService {
         );
 
         return new TransactionResponseDTO(transaction).createMessageSucess();
+    }
+
+    public TransactionResponseDTO getById(Long id) {
+        return new TransactionResponseDTO(transactionPicPayPort.getById(id));
     }
 }

@@ -29,4 +29,8 @@ public class UserService {
                 .map(UserResponseDTO::new)
                 .toList();
     }
+
+    public UserResponseDTO findById(Long id) {
+        return new UserResponseDTO(userPicPayPort.findUserById(id));
+    }
 }

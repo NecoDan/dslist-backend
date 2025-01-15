@@ -9,4 +9,6 @@ public interface TransactionPicPayPort {
     Transaction createTransaction(TransactionDTO transactionDTO) throws Exception;
 
     List<Transaction> getAllTransactions();
+
+    Transaction getById(Long id);
 }

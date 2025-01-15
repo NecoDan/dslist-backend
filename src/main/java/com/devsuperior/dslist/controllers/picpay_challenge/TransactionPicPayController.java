@@ -22,6 +22,11 @@ public class TransactionPicPayController    {
         return ResponseEntity.ok(transactionService.getAll());
     }
 
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<TransactionResponseDTO> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(transactionService.getById(id));
+    }
+
     @PostMapping
     public ResponseEntity<TransactionResponseDTO> create(@RequestBody TransactionRequestDTO transactionDTO) throws Exception {
         return new ResponseEntity<>(transactionService.createTransaction(transactionDTO), HttpStatus.CREATED);
