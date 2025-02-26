@@ -4,6 +4,7 @@ import com.devsuperior.dslist.users_jpa.dto.UserDTO;
 import com.devsuperior.dslist.users_jpa.ports.UserPort;
 import com.devsuperior.dslist.users_jpa.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
+@Service("UserJpaService")
 @RequiredArgsConstructor
 public class UserService implements UserPort {
 

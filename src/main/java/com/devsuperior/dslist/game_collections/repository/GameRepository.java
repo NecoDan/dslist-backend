@@ -1,4 +1,4 @@
-package com.devsuperior.dslist.game_collections.repositories;
+package com.devsuperior.dslist.game_collections.repository;
 
 import java.util.List;
 
