@@ -43,6 +43,11 @@ public class TransactionItauBusiness implements TransactionItauPort {
                 .findFirst();
     }
 
+    @Override
+    public void deleteById(String transactionId) {
+        
+    }
+
     private void inicializeTransactionList() {
         if (Objects.isNull(this.transactionItauList)) this.transactionItauList = new ArrayList<>();
     }
