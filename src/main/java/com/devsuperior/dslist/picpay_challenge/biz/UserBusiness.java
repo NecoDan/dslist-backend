@@ -41,7 +41,6 @@ public class UserBusiness implements UserPicPayPort {
 
     @Override
     public User findUserById(Long id) {
-
         return new User(this.userRepository.findById(id)
                 .orElseThrow(() ->
                         new IllegalStateException("Usuário não encontrado!")
