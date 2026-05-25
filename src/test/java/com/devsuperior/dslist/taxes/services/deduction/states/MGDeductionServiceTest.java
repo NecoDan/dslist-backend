@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 class MGDeductionServiceTest {
 
-    @InjectMocks MGDeductionService mgDeductionServiceMock;
+    @InjectMocks MGCalculadoraDeducaoService mgDeductionServiceMock;
 
     @BeforeEach
     void setUp() {
@@ -36,7 +36,7 @@ class MGDeductionServiceTest {
         final double expectedValue = 120.0;
 
         // -- 02_Ação
-        final double resultValue = mgDeductionServiceMock.deduction(value);
+        final double resultValue = mgDeductionServiceMock.calcularValorDeducao(value);
 
         // -- 03_Verificação_Validação
         assertTrue(resultValue > 0);
@@ -50,7 +50,7 @@ class MGDeductionServiceTest {
         final double expectedValue = 120.0;
 
         // -- 02_Ação
-        final BigDecimal resultValue = mgDeductionServiceMock.deductionBy(value);
+        final BigDecimal resultValue = mgDeductionServiceMock.calcularValorDeducaoPor(value);
 
         // -- 03_Verificação_Validação
         assertNotNull(resultValue);
@@ -65,7 +65,7 @@ class MGDeductionServiceTest {
         final double expectedValue = 120.0;
 
         // -- 02_Ação
-        final double resultValue = mgDeductionServiceMock.deduction(BigDecimal.valueOf(value));
+        final double resultValue = mgDeductionServiceMock.calcularValorDeducao(BigDecimal.valueOf(value));
 
         // -- 03_Verificação_Validação
         assertTrue(resultValue > 0);

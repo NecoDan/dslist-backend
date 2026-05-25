@@ -4,29 +4,27 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
-@Import(PayDeliveryService.class)
-class PayDeliveryServiceV3Test {
+@Import(PagamentoDeliveryService.class)
+class PagamentoDeliveryServiceV3Test {
 
     @MockBean
-    private TaxService taxService;
+    private TaxaEntregaService taxaEntregaService;
 
     @MockBean
     private DeliveryService deliveryService;
 
+    private PagamentoDeliveryService pagamentoDeliveryServiceMock;
+
     @BeforeEach
     void setUp() {
+        this.pagamentoDeliveryServiceMock = new PagamentoDeliveryService(new TaxaEntregaService(), new DeliveryService());
     }
 
     @AfterEach
@@ -34,8 +32,8 @@ class PayDeliveryServiceV3Test {
     }
 
     @Test
-    void isValidPayDeliveryServiceMock() {
-        assertNotNull(this.payDeliveryServiceMock);
+    void isValidPagamentoDeliveryServiceMock() {
+        assertNotNull(this.pagamentoDeliveryServiceMock);
     }
 
     @Test
@@ -45,7 +43,7 @@ class PayDeliveryServiceV3Test {
         final double expectedValue = 350.0;
 
         // -- 02_Ação
-        final double scValueResult = payDeliveryServiceMock.price(purchaseOrderValue, "SC");
+        final double scValueResult = pagamentoDeliveryServiceMock.calcularPrecoFinal(purchaseOrderValue, "SC");
 
         // -- 03_Verificação_Validação
         assertTrue(scValueResult > 0);
@@ -60,7 +58,7 @@ class PayDeliveryServiceV3Test {
         final double expectedValue = 340.0;
 
         // -- 02_Ação
-        final double scValueResult = payDeliveryServiceMock.price(purchaseOrderValue, "SP");
+        final double scValueResult = pagamentoDeliveryServiceMock.calcularPrecoFinal(purchaseOrderValue, "SP");
 
         // -- 03_Verificação_Validação
         assertTrue(scValueResult > 0);

@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 class SPDeductionServiceTest {
 
-    @InjectMocks SPDeductionService spDeductionServiceMock;
+    @InjectMocks SPCalculadoraDeducaoService spDeductionServiceMock;
 
     @BeforeEach
     void setUp() {
@@ -36,7 +36,7 @@ class SPDeductionServiceTest {
         final double expectedValue = 100.0;
 
         // -- 02_Ação
-        final double resultValue = spDeductionServiceMock.deduction(value);
+        final double resultValue = spDeductionServiceMock.calcularValorDeducao(value);
 
         // -- 03_Verificação_Validação
         assertTrue(resultValue > 0);
@@ -50,7 +50,7 @@ class SPDeductionServiceTest {
         final double expectedValue = 100.0;
 
         // -- 02_Ação
-        final BigDecimal resultValue = spDeductionServiceMock.deductionBy(value);
+        final BigDecimal resultValue = spDeductionServiceMock.calcularValorDeducaoPor(value);
 
         // -- 03_Verificação_Validação
         assertNotNull(resultValue);
@@ -65,7 +65,7 @@ class SPDeductionServiceTest {
         final double expectedValue = 100.0;
 
         // -- 02_Ação
-        final double resultValue = spDeductionServiceMock.deduction(BigDecimal.valueOf(value));
+        final double resultValue = spDeductionServiceMock.calcularValorDeducao(BigDecimal.valueOf(value));
 
         // -- 03_Verificação_Validação
         assertTrue(resultValue > 0);

@@ -29,12 +29,12 @@ public class TransactionItauController {
     }
 
     @GetMapping(value = "/v1/{id}")
-    public ResponseEntity<TransactionItauResponseDTO> getbyId(@PathParam("id") String id) {
+    public ResponseEntity<TransactionItauResponseDTO> getById(@PathVariable("id") String id) {
         return new ResponseEntity<>(transactionItauService.getById(id), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/v1/{id}")
-    public ResponseEntity<String> delete(@PathParam("id") String id){
-        return new ResponseEntity<>(transactionItauService.deleteById(), HttpStatus.OK);
+    public ResponseEntity<String> delete(@PathVariable("id") String id) {
+        return new ResponseEntity<>(transactionItauService.deleteById(id), HttpStatus.OK);
     }
 }

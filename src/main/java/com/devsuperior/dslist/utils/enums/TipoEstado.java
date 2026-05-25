@@ -1,0 +1,61 @@
+package com.devsuperior.dslist.utils.enums;
+
+import lombok.Getter;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.stream.Stream;
+
+@Getter
+public enum TipoEstado {
+
+    AC("AC", "Acre"),
+    AL("AL", "Alagoas"),
+    AP("AP", "Amapá"),
+    AM("AM", "Amazonas"),
+    BA("BA", "Bahia"),
+    CE("CE", "Ceará"),
+    DF("DF", "Distrito Federal"),
+    ES("ES", "Espírito Santo"),
+    GO("GO", "Goiás"),
+    MA("MA", "Maranhão"),
+    MT("MT", "Mato Grosso"),
+    MS("MS", "Mato Grosso do Sul"),
+    MG("MG", "Minas Gerais"),
+    PA("PA", "Pará"),
+    PB("PB", "Paraíba"),
+    PR("PR", "Paraná"),
+    PE("PE", "Pernambuco"),
+    PI("PI", "Piauí"),
+    RJ("RJ", "Rio de Janeiro"),
+    RN("RN", "Rio Grande do Norte"),
+    RS("RS", "Rio Grande do Sul"),
+    RO("RO", "Rondônia"),
+    RR("RR", "Roraima"),
+    SC("SC", "Santa Catarina"),
+    SP("SP", "São Paulo"),
+    SE("SE", "Sergipe"),
+    TO("TO", "Tocantins");
+
+    private final String codigo;
+    private final String nome;
+
+    TipoEstado(String codigo, String nome) {
+        this.codigo = codigo;
+        this.nome = nome;
+    }
+
+    public String getNomeMaiusculo() {
+        return this.nome.toUpperCase();
+    }
+
+    public static TipoEstado of(String codigo) {
+        return getStreamValues()
+                .filter(tipoEstado -> StringUtils.equals(tipoEstado.getCodigo(), codigo.toUpperCase()))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Código inválido e/ou inexistente para o TipoEstado."));
+    }
+
+    private static Stream<TipoEstado> getStreamValues() {
+        return Stream.of(TipoEstado.values());
+    }
+}

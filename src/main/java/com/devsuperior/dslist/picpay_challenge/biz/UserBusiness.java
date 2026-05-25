@@ -20,7 +20,8 @@ public class UserBusiness implements UserPicPayPort {
     private final UserRepository userRepository;
 
     @Override
-    public void validateTransaction(User userSender, BigDecimal amount) throws Exception {
+    public void validateTransaction(User userSender,
+                                    BigDecimal amount) throws Exception {
 
         if (userSender.getUserType() == UserTypeDomain.MERCHANT) {
             throw new Exception("Usuário do tipo LOJISTA não possui autorização para realizar à transação.");

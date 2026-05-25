@@ -11,7 +11,7 @@
     <description>Intensivão Java Spring</description>
 
     <parent>
-        <groupId>org.springframework.boot</groupId>
+        <groupId>org.springframework.boot</groupId>w
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.3.5</version>
         <relativePath/> <!-- lookup parent from repository -->n

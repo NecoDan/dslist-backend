@@ -9,9 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class PayDeliveryServiceV1Test {
+class PagamentoDeliveryServiceV1Test {
 
-    @Autowired private PayDeliveryService payDeliveryServiceMock;
+    @Autowired private PagamentoDeliveryService pagamentoDeliveryServiceMock;
 
     @BeforeEach
     void setUp() {
@@ -23,7 +23,7 @@ class PayDeliveryServiceV1Test {
 
     @Test
     void isValidPayDeliveryServiceMock() {
-        assertNotNull(this.payDeliveryServiceMock);
+        assertNotNull(this.pagamentoDeliveryServiceMock);
     }
 
     @Test
@@ -33,7 +33,7 @@ class PayDeliveryServiceV1Test {
         final double expectedValue = 350.0;
 
         // -- 02_Ação
-        final double scValueResult = payDeliveryServiceMock.price(purchaseOrderValue, "SC");
+        final double scValueResult = pagamentoDeliveryServiceMock.calcularPrecoFinal(purchaseOrderValue, "SC");
 
         // -- 03_Verificação_Validação
         assertTrue(scValueResult > 0);
@@ -48,7 +48,7 @@ class PayDeliveryServiceV1Test {
         final double expectedValue = 340.0;
 
         // -- 02_Ação
-        final double scValueResult = payDeliveryServiceMock.price(purchaseOrderValue, "SP");
+        final double scValueResult = pagamentoDeliveryServiceMock.calcularPrecoFinal(purchaseOrderValue, "SP");
 
         // -- 03_Verificação_Validação
         assertTrue(scValueResult > 0);

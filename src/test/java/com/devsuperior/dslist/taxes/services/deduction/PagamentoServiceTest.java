@@ -1,7 +1,7 @@
 package com.devsuperior.dslist.taxes.services.deduction;
 
-import com.devsuperior.dslist.taxes.services.deduction.states.MGDeductionService;
-import com.devsuperior.dslist.taxes.services.deduction.states.SPDeductionService;
+import com.devsuperior.dslist.taxes.services.deduction.states.MGCalculadoraDeducaoService;
+import com.devsuperior.dslist.taxes.services.deduction.states.SPCalculadoraDeducaoService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,9 +14,9 @@ import java.math.BigDecimal;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-class PayServiceTest {
+class PagamentoServiceTest {
 
-    @InjectMocks private PayService payServiceMock;
+    @InjectMocks private PagamentoService pagamentoServiceMock;
 
     @BeforeEach
     void setUp() {
@@ -28,18 +28,18 @@ class PayServiceTest {
 
     @Test
     void isNotNull() {
-        assertNotNull(this.payServiceMock);
+        assertNotNull(this.pagamentoServiceMock);
     }
 
     @Test
     void performTaxCalculationMinasGerais() {
         // -- 01_Cenário
-        final PayService payService = new PayService(new MGDeductionService());
+        final PagamentoService pagamentoService = new PagamentoService(new MGCalculadoraDeducaoService());
         final double value = 1000D;
         final double expectedValue = 176.0;
 
         // -- 02_Ação
-        final BigDecimal resultValue = payService.performTaxCalculation(value);
+        final BigDecimal resultValue = pagamentoService.efetuarCalculoImposto(value);
 
         // -- 03_Verificação_Validação
         assertNotNull(resultValue);
@@ -49,12 +49,12 @@ class PayServiceTest {
     @Test
     void performTaxCalculationByMinasGerais() {
         // -- 01_Cenário
-        final PayService payService = new PayService(new MGDeductionService());
+        final PagamentoService pagamentoService = new PagamentoService(new MGCalculadoraDeducaoService());
         final double value = 1000D;
         final double expectedValue = 176.0;
 
         // -- 02_Ação
-        final double resultValue = payService.performTaxCalculationBy(value);
+        final double resultValue = pagamentoService.efetuarCalculoImpostoPor(value);
 
         // -- 03_Verificação_Validação
         assertTrue(resultValue > 0);
@@ -64,12 +64,12 @@ class PayServiceTest {
     @Test
     void performTaxCalculationSaoPaulo() {
         // -- 01_Cenário
-        final PayService payService = new PayService(new SPDeductionService());
+        final PagamentoService pagamentoService = new PagamentoService(new SPCalculadoraDeducaoService());
         final double value = 1000D;
         final double expectedValue = 180.0;
 
         // -- 02_Ação
-        final BigDecimal resultValue = payService.performTaxCalculation(value);
+        final BigDecimal resultValue = pagamentoService.efetuarCalculoImposto(value);
 
         // -- 03_Verificação_Validação
         assertNotNull(resultValue);
@@ -79,12 +79,12 @@ class PayServiceTest {
     @Test
     void performTaxCalculationBySaoPaulo() {
         // -- 01_Cenário
-        final PayService payService = new PayService(new SPDeductionService());
+        final PagamentoService pagamentoService = new PagamentoService(new SPCalculadoraDeducaoService());
         final double value = 1000D;
         final double expectedValue = 180.0;
 
         // -- 02_Ação
-        final double resultValue = payService.performTaxCalculationBy(value);
+        final double resultValue = pagamentoService.efetuarCalculoImpostoPor(value);
 
         // -- 03_Verificação_Validação
         assertTrue(resultValue > 0);

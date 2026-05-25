@@ -7,13 +7,13 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-class PayDeliveryServiceV2Test {
+class PagamentoDeliveryServiceV2Test {
 
-    private PayDeliveryService payDeliveryServiceVar;
+    private PagamentoDeliveryService pagamentoDeliveryServiceVar;
 
     @BeforeEach
     void setUp() {
-        this.payDeliveryServiceVar = new PayDeliveryService(new TaxService(), new DeliveryService());
+        this.pagamentoDeliveryServiceVar = new PagamentoDeliveryService(new TaxaEntregaService(), new DeliveryService());
     }
 
     @AfterEach
@@ -21,8 +21,8 @@ class PayDeliveryServiceV2Test {
     }
 
     @Test
-    void isValidPayDeliveryService() {
-        assertNotNull(this.payDeliveryServiceVar);
+    void isValidPagamentoDeliveryService() {
+        assertNotNull(this.pagamentoDeliveryServiceVar);
     }
 
     @Test
@@ -32,7 +32,7 @@ class PayDeliveryServiceV2Test {
         final double expectedValue = 350.0;
 
         // -- 02_Ação
-        final double scValueResult = payDeliveryServiceVar.price(purchaseOrderValue, "SC");
+        final double scValueResult = pagamentoDeliveryServiceVar.calcularPrecoFinal(purchaseOrderValue, "SC");
 
         // -- 03_Verificação_Validação
         assertTrue(scValueResult > 0);
@@ -47,7 +47,7 @@ class PayDeliveryServiceV2Test {
         final double expectedValue = 340.0;
 
         // -- 02_Ação
-        final double scValueResult = payDeliveryServiceVar.price(purchaseOrderValue, "SP");
+        final double scValueResult = pagamentoDeliveryServiceVar.calcularPrecoFinal(purchaseOrderValue, "SP");
 
         // -- 03_Verificação_Validação
         assertTrue(scValueResult > 0);
