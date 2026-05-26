@@ -4,16 +4,11 @@ import com.devsuperior.dslist.itau_v1_challenge.domain.TransactionItau;
 import com.devsuperior.dslist.itau_v1_challenge.dto.internal.TransactionItauResponseDTO;
 import com.devsuperior.dslist.itau_v1_challenge.dto.request.TransactionItauRequestDTO;
 import com.devsuperior.dslist.itau_v1_challenge.ports.TransactionItauPort;
-import com.devsuperior.dslist.picpay_challenge.domain.Transaction;
-import com.devsuperior.dslist.picpay_challenge.dto.internal.TransactionDTO;
-import com.devsuperior.dslist.picpay_challenge.dto.internal.TransactionResponseDTO;
-import com.devsuperior.dslist.picpay_challenge.dto.request.TransactionRequestDTO;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -45,8 +40,7 @@ public class TransactionItauService {
         );
     }
 
-    public String deleteById(final String transactionId) {
-        //           transactionItauPort.deleteById();
-        return StringUtils.EMPTY;
+    public void deleteById(final String transactionId) {
+        transactionItauPort.deleteByIdInMemory(transactionId);
     }
 }

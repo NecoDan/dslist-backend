@@ -12,43 +12,39 @@ import java.util.*;
 @RequiredArgsConstructor
 public class TransactionItauBusiness implements TransactionItauPort {
 
-    private List<TransactionItau> transactionItauList;
+    private final List<TransactionItau> transactionItauList = new ArrayList<>();
 
     @Override
     public List<TransactionItau> getAllTransactionsInMemory() {
-        inicializeTransactionList();
         return this.transactionItauList;
     }
 
     @Override
     public TransactionItau createTransactionInMemory(TransactionItau transactionItau) {
-        inicializeTransactionList();
-
         final var transactionId = UUID.randomUUID().toString();
         transactionItau.setId(transactionId);
         this.transactionItauList.add(transactionItau);
 
         return getByIdInMemory(transactionId)
                 .orElseThrow(
-                        () -> new IllegalStateException("Falha ao criar uma nova transação.")
+                        () -> new IllegalStateException("Falha ao criar a transação.")
                 );
     }
 
     @Override
     public Optional<TransactionItau> getByIdInMemory(final String transactionId) {
-        inicializeTransactionList();
-
         return this.transactionItauList.stream()
-                .filter(transactionItau -> StringUtils.equals(transactionId, transactionItau.getId()))
+                .filter(transactionItau -> transactionId.equals(transactionItau.getId()))
                 .findFirst();
     }
 
     @Override
-    public void deleteById(String transactionId) {
-        
-    }
+    public void deleteByIdInMemory(String transactionId) {
+        getByIdInMemory(transactionId)
+                .orElseThrow(() ->
+                        new IllegalArgumentException("Nenhuma transação encontrada por meio do id da transação %s.".formatted(transactionId))
+                );
 
-    private void inicializeTransactionList() {
-        if (Objects.isNull(this.transactionItauList)) this.transactionItauList = new ArrayList<>();
+        this.transactionItauList.removeIf(transactionItau -> transactionId.equals(transactionItau.getId()));
     }
 }
