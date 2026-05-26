@@ -5,7 +5,6 @@ import com.devsuperior.dslist.itau_v1_challenge.dto.internal.TransactionItauResp
 import com.devsuperior.dslist.itau_v1_challenge.dto.request.TransactionItauRequestDTO;
 import com.devsuperior.dslist.itau_v1_challenge.ports.TransactionItauPort;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

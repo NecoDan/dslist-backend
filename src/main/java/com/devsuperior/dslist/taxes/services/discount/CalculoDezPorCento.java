@@ -1,7 +1,10 @@
 package com.devsuperior.dslist.taxes.services.discount;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.math.BigDecimal;
 
+@Slf4j
 public class CalculoDezPorCento implements CalculoPercentual {
 
     private double valorCalculado = BigDecimal.ZERO.doubleValue();
@@ -10,10 +13,12 @@ public class CalculoDezPorCento implements CalculoPercentual {
     @Override
     public void calling() {
         System.out.println("\n CalculoDezPorCento calling...");
+        log.info("\n CalculoDezPorCento calling...");
     }
 
     @Override
     public void data() {
+        log.info("\n CalculoDezPorCento data: {}.", this.valorCalculado);
         System.out.printf("\n CalculoDezPorCento data: %f.", this.valorCalculado);
     }
 

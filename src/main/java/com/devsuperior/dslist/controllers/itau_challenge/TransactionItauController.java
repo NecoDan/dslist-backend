@@ -3,7 +3,6 @@ package com.devsuperior.dslist.controllers.itau_challenge;
 import com.devsuperior.dslist.itau_v1_challenge.dto.internal.TransactionItauResponseDTO;
 import com.devsuperior.dslist.itau_v1_challenge.dto.request.TransactionItauRequestDTO;
 import com.devsuperior.dslist.itau_v1_challenge.service.TransactionItauService;
-import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
