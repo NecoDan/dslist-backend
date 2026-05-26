@@ -16,10 +16,6 @@ class PagamentoDeliveryServiceV2Test {
         this.pagamentoDeliveryServiceVar = new PagamentoDeliveryService(new TaxaEntregaService(), new DeliveryService());
     }
 
-    @AfterEach
-    void tearDown() {
-    }
-
     @Test
     void isValidPagamentoDeliveryService() {
         assertNotNull(this.pagamentoDeliveryServiceVar);

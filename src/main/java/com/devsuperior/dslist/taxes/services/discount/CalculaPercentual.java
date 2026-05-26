@@ -4,21 +4,18 @@ package com.devsuperior.dslist.taxes.services.discount;
 import com.devsuperior.dslist.utils.FunctionalUtils;
 import org.apache.commons.lang3.RandomUtils;
 
-import java.math.BigDecimal;
-
 public class CalculaPercentual {
 
     public static void main(String[] args) {
 
-        final double valor = RandomUtils.nextDouble(100.0D, 1000.0D);
-        double valorDesconto = BigDecimal.ZERO.doubleValue();
+        final double valor = RandomUtils.secure().randomDouble(100.0D, 1000.0D);
 
         CalculoPercentual calculoPercentual10 = new CalculoDezPorCento();
         calculoPercentual10.calling();
         final double porcentagemVar2 = calculoPercentual10.calcular(valor);
         calculoPercentual10.data();
 
-        valorDesconto = valor - porcentagemVar2;
+        double valorDesconto = valor - porcentagemVar2;
         imprimir(valor, "10", valorDesconto);
 
         CalculoPercentual calculoPercentual20 = new CalculoVintePorCento();

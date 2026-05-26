@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-@Service("BalanceManagerBusiness")
+@Service("balanceManagerBusiness")
 @RequiredArgsConstructor
 public class BalanceManagerBusiness {
 

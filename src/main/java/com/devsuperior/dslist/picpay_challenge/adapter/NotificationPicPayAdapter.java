@@ -26,7 +26,8 @@ public class NotificationPicPayAdapter implements NotificationPicPayPort {
 
     private static final String PATH_TRANSACTION_NOTIFICATION = "/v1/notify";
 
-    private static final String PATH_TRANSACTION_NOTIFICATION_MOCK = "https://run.mocky.io/v3/6b650a60-a8de-43f3-a5b9-290f43feca33";
+    private static final String PATH_TRANSACTION_NOTIFICATION_MOCK = URI.create("https://run.mocky.io/v3/6b650a60-a8de-43f3-a5b9-290f43feca33")
+            .toString();
 
     @Value("${address.service.base.url.apis.picpay}") private String uriApiPicPay;
 

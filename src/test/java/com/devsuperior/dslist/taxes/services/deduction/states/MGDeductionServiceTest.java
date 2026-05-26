@@ -1,7 +1,5 @@
 package com.devsuperior.dslist.taxes.services.deduction.states;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -15,14 +13,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class MGDeductionServiceTest {
 
     @InjectMocks MGCalculadoraDeducaoService mgDeductionServiceMock;
-
-    @BeforeEach
-    void setUp() {
-    }
-
-    @AfterEach
-    void tearDown() {
-    }
 
     @Test
     void isValidMGDeductionService() {

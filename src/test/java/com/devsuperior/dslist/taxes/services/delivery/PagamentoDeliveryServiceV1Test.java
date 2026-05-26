@@ -13,14 +13,6 @@ class PagamentoDeliveryServiceV1Test {
 
     @Autowired private PagamentoDeliveryService pagamentoDeliveryServiceMock;
 
-    @BeforeEach
-    void setUp() {
-    }
-
-    @AfterEach
-    void tearDown() {
-    }
-
     @Test
     void isValidPayDeliveryServiceMock() {
         assertNotNull(this.pagamentoDeliveryServiceMock);

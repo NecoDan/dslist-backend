@@ -1,22 +1,23 @@
 package com.devsuperior.dslist.controllers.game_collections;
 
-import java.util.Collections;
-import java.util.List;
-
+import com.devsuperior.dslist.game_collections.dto.GameDTO;
+import com.devsuperior.dslist.game_collections.dto.GameMinDTO;
 import com.devsuperior.dslist.game_collections.dto.GameMinReportDTO;
 import com.devsuperior.dslist.game_collections.ports.GamePort;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.web.bind.annotation.*;
 
-import com.devsuperior.dslist.game_collections.dto.GameDTO;
-import com.devsuperior.dslist.game_collections.dto.GameMinDTO;
+import java.util.Collections;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/games")
 @RequiredArgsConstructor
+@Slf4j
 public class GameController {
 
     private final GamePort gamePort;
@@ -56,7 +57,10 @@ public class GameController {
         return gamePort.findAllByYearRelease(year);
     }
 
-    public List<GameMinDTO> findAllByScore(@RequestParam(value = "min") Double min, @RequestParam(value = "max") Double max) {
+    public List<GameMinDTO> findAllByScore(@RequestParam(value = "min") Double minimo,
+                                           @RequestParam(value = "max") Double maximo) {
+        log.info("Minimo: {}", minimo);
+        log.info("Minimo: {}", maximo);
         return Collections.emptyList();
     }
 

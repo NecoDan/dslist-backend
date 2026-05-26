@@ -7,13 +7,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DslistApplication implements CommandLineRunner {
+public class DsListApplication implements CommandLineRunner {
 
     @Autowired
 	private PagamentoDeliveryService pagamentoDeliveryService;
 
     public static void main(String[] args) {
-        SpringApplication.run(DslistApplication.class, args);
+        SpringApplication.run(DsListApplication.class, args);
     }
 
     @Override

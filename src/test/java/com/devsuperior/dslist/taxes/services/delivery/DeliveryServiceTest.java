@@ -17,14 +17,6 @@ class DeliveryServiceTest {
 
     @Autowired private DeliveryService deliveryService;
 
-    @BeforeEach
-    void setUp() {
-    }
-
-    @AfterEach
-    void tearDown() {
-    }
-
     @Test
     void obterTaxaPorEstado_LowerCase() {
         // -- 01_Cenário

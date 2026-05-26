@@ -13,23 +13,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FunctionalUtilsTest {
 
-    @BeforeEach
-    void setUp() {
-    }
-
-    @AfterEach
-    void tearDown() {
-    }
-
     @Test
-    public void testFormatCreationDateWithNullInput() {
+    void testFormatCreationDateWithNullInput() {
         // Test when the input is null
         String result = FunctionalUtils.formatCreationDate(null);
         assertEquals(StringUtils.EMPTY, result, "O resultado deve ser uma string vazia quando a entrada for nula");
     }
 
     @Test
-    public void testFormatCreationDateWithValidInput() {
+    void testFormatCreationDateWithValidInput() {
         // Test when the input is a valid LocalDateTime
         LocalDateTime dateTime = LocalDateTime.of(2023, 10, 1, 12, 30, 45);
         String expected = FunctionalUtils.formatCreationDateBy(dateTime); // Assuming this method is implemented
@@ -99,5 +91,96 @@ class FunctionalUtilsTest {
         Locale.setDefault(new Locale.Builder().setLanguage("pt").setRegion("BR").build());
         String result = FunctionalUtils.formatDecimalNumber(input);
         assertEquals("1234.57", result, "O número deve ser formatado corretamente com a localidade PT_BR.");
+    }
+
+    @Test
+    void formatCpfWithValidCpf() {
+        String cpf = "12345678909";
+        String result = FunctionalUtils.formatCpf(cpf);
+        assertEquals("123.456.789-09", result, "The CPF should be formatted correctly.");
+    }
+
+    @Test
+    void formatCpfWithCpfContainingSpecialCharacters() {
+        String cpf = "123.456.789-09";
+        String result = FunctionalUtils.formatCpf(cpf);
+        assertEquals("123.456.789-09", result, "The CPF should be formatted correctly even if it contains special characters.");
+    }
+
+    @Test
+    void formatCpfWithCpfContainingSpaces() {
+        String cpf = " 123 456 789 09 ";
+        String result = FunctionalUtils.formatCpf(cpf);
+        assertEquals("123.456.789-09", result, "The CPF should be formatted correctly even if it contains spaces.");
+    }
+
+    @Test
+    void formatCpfWithEmptyString() {
+        String cpf = "";
+        String result = FunctionalUtils.formatCpf(cpf);
+        assertEquals("", result, "An empty CPF should return an empty string.");
+    }
+
+    @Test
+    void formatCpfWithNullInput() {
+        assertThrows(NullPointerException.class, () -> {
+            FunctionalUtils.formatCpf(null);
+        }, "A null CPF should throw a NullPointerException.");
+    }
+
+    @Test
+    void formatCpfWithInvalidLengthCpf() {
+        String cpf = "12345";
+        String result = FunctionalUtils.formatCpf(cpf);
+        assertEquals("12345", result, "An invalid length CPF should return the input as is.");
+    }
+
+    @Test
+    void formatDecimalNumberByWithValidDouble() {
+        Double input = 1234.567;
+        String result = FunctionalUtils.formatDecimalNumberBy(input);
+        assertEquals("1234.57", result, "The number should be rounded to 2 decimal places.");
+    }
+
+    @Test
+    void formatDecimalNumberByWithExactTwoDecimalPlaces() {
+        Double input = 1234.56;
+        String result = FunctionalUtils.formatDecimalNumberBy(input);
+        assertEquals("1234.56", result, "The number should remain the same if it already has 2 decimal places.");
+    }
+
+    @Test
+    void formatDecimalNumberByWithZero() {
+        Double input = 0.0;
+        String result = FunctionalUtils.formatDecimalNumberBy(input);
+        assertEquals("0.00", result, "Zero should be formatted as 0.00.");
+    }
+
+    @Test
+    void formatDecimalNumberByWithNegativeDouble() {
+        Double input = -1234.567;
+        String result = FunctionalUtils.formatDecimalNumberBy(input);
+        assertEquals("-1234.57", result, "Negative numbers should be rounded to 2 decimal places.");
+    }
+
+    @Test
+    void formatDecimalNumberByWithSmallDouble() {
+        Double input = 0.004;
+        String result = FunctionalUtils.formatDecimalNumberBy(input);
+        assertEquals("0.00", result, "Small numbers less than 0.005 should be rounded down to 0.00.");
+    }
+
+    @Test
+    void formatDecimalNumberByWithRoundingUp() {
+        Double input = 1.005;
+        String result = FunctionalUtils.formatDecimalNumberBy(input);
+        assertEquals("1.01", result, "Numbers should be rounded correctly when the third decimal place is 5 or greater.");
+    }
+
+    @Test
+    void formatDecimalNumberByWithNullInput() {
+        assertThrows(NullPointerException.class, () -> {
+            FunctionalUtils.formatDecimalNumberBy(null);
+        }, "A null input should throw a NullPointerException.");
     }
 }
