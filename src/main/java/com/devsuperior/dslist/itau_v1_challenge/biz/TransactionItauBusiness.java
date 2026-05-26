@@ -1,12 +1,16 @@
 package com.devsuperior.dslist.itau_v1_challenge.biz;
 
+import com.devsuperior.dslist.exceptions.TransactionItauCreateFailedException;
+import com.devsuperior.dslist.exceptions.TransactionItauNotFoundException;
 import com.devsuperior.dslist.itau_v1_challenge.domain.TransactionItau;
 import com.devsuperior.dslist.itau_v1_challenge.ports.TransactionItauPort;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
@@ -27,7 +31,7 @@ public class TransactionItauBusiness implements TransactionItauPort {
 
         return getByIdInMemory(transactionId)
                 .orElseThrow(
-                        () -> new IllegalStateException("Falha ao criar a transação.")
+                        () -> new TransactionItauCreateFailedException("Falha ao criar a transação.")
                 );
     }
 
@@ -42,7 +46,7 @@ public class TransactionItauBusiness implements TransactionItauPort {
     public void deleteByIdInMemory(String transactionId) {
         getByIdInMemory(transactionId)
                 .orElseThrow(() ->
-                        new IllegalArgumentException("Nenhuma transação encontrada por meio do id da transação %s.".formatted(transactionId))
+                        new TransactionItauNotFoundException("Nenhuma transação encontrada por meio do id da transação %s.".formatted(transactionId))
                 );
 
         this.transactionItauList.removeIf(transactionItau -> transactionId.equals(transactionItau.getId()));

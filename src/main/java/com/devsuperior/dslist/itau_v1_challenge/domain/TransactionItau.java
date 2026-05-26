@@ -21,10 +21,6 @@ public class TransactionItau implements Serializable {
     private BigDecimal amount;
     private LocalDateTime createdAt;
 
-    //    public TransactionItau(TransactionEntity entity){
-    //        BeanUtils.copyProperties(entity, this);
-    //    }
-
     public TransactionItau(TransactionItauRequestDTO entity) {
         BeanUtils.copyProperties(entity, this);
         this.createdAt = entity.getCreatedAt().toLocalDateTime();

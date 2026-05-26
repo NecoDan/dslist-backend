@@ -6,8 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Repository("UserPicPayRepository")
+@Repository("userPicPayRepository")
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
-
     Optional<UserEntity> findUserByDocument(String document);
 }

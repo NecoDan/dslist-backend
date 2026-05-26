@@ -1,5 +1,6 @@
 package com.devsuperior.dslist.config.advice;
 
+import com.devsuperior.dslist.exceptions.EntityCreateFailedException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -22,12 +23,39 @@ public class ControllerExceptionHandler {
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity threatNotFound(EntityNotFoundException exception){
-        return ResponseEntity.notFound().build();
+    public ResponseEntity threatNotFound(EntityNotFoundException exception) {
+        final var erroMessage = "%d - %s: %s.".formatted(
+                HttpStatus.NOT_FOUND.value(),
+                HttpStatus.NOT_FOUND.getReasonPhrase(),
+                exception.getMessage()
+        );
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(ExceptionHandlerDTO.builder()
+                        .message(erroMessage)
+                        .httpStatus(HttpStatus.NOT_FOUND)
+                        .build()
+                );
+    }
+
+    @ExceptionHandler(EntityCreateFailedException.class)
+    public ResponseEntity threatUnprocessableEntity(EntityCreateFailedException exception) {
+        final var erroMessage = "%d - %s: %s.".formatted(
+                HttpStatus.UNPROCESSABLE_ENTITY.value(),
+                HttpStatus.UNPROCESSABLE_ENTITY.getReasonPhrase(),
+                exception.getMessage()
+        );
+
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
+                .body(ExceptionHandlerDTO.builder()
+                        .message(erroMessage)
+                        .httpStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+                        .build()
+                );
     }
 
     @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity threatGeneralRuntimeException(RuntimeException exception){
+    public ResponseEntity threatGeneralRuntimeException(RuntimeException exception) {
 
         return ResponseEntity.internalServerError()
                 .body(ExceptionHandlerDTO.builder()
@@ -38,7 +66,7 @@ public class ControllerExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity threatGeneralException(Exception exception){
+    public ResponseEntity threatGeneralException(Exception exception) {
 
         return ResponseEntity.internalServerError()
                 .body(ExceptionHandlerDTO.builder()

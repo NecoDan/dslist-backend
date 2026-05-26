@@ -34,7 +34,8 @@ public class TransactionItauController {
     }
 
     @DeleteMapping(value = "/v1/{id}")
-    public ResponseEntity<String> delete(@PathVariable("id") String id) {
-        return new ResponseEntity<>(transactionItauService.deleteById(id), HttpStatus.OK);
+    public ResponseEntity<Void> delete(@PathVariable("id") String id) {
+        transactionItauService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }

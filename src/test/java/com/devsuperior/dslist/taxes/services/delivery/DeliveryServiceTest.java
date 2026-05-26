@@ -2,20 +2,25 @@ package com.devsuperior.dslist.taxes.services.delivery;
 
 import com.devsuperior.dslist.taxes.services.deduction.enums.TipoTaxaEstado;
 import com.devsuperior.dslist.utils.enums.TipoEstado;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
 
 import java.math.BigDecimal;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest
 class DeliveryServiceTest {
 
-    @Autowired private DeliveryService deliveryService;
+    @InjectMocks
+    private DeliveryService deliveryService;
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+    }
 
     @Test
     void obterTaxaPorEstado_LowerCase() {
