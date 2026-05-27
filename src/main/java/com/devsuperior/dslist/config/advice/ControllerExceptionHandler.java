@@ -24,15 +24,10 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity threatNotFound(EntityNotFoundException exception) {
-        final var erroMessage = "%d - %s: %s.".formatted(
-                HttpStatus.NOT_FOUND.value(),
-                HttpStatus.NOT_FOUND.getReasonPhrase(),
-                exception.getMessage()
-        );
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(ExceptionHandlerDTO.builder()
-                        .message(erroMessage)
+                        .message(exception.getMessage())
                         .httpStatus(HttpStatus.NOT_FOUND)
                         .build()
                 );
@@ -40,15 +35,10 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(EntityCreateFailedException.class)
     public ResponseEntity threatUnprocessableEntity(EntityCreateFailedException exception) {
-        final var erroMessage = "%d - %s: %s.".formatted(
-                HttpStatus.UNPROCESSABLE_ENTITY.value(),
-                HttpStatus.UNPROCESSABLE_ENTITY.getReasonPhrase(),
-                exception.getMessage()
-        );
 
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
                 .body(ExceptionHandlerDTO.builder()
-                        .message(erroMessage)
+                        .message(exception.getMessage())
                         .httpStatus(HttpStatus.UNPROCESSABLE_ENTITY)
                         .build()
                 );

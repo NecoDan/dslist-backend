@@ -38,7 +38,7 @@ public class TransactionItauService {
 
         if (isCreatedAtInvalid(transactionDTO)) {
             log.error("A data de criação da transação é obrigatória. Data e hora maiores que o momento atual não são permitidos. Payload: {}", transactionDTO);
-            throw new EntityCreateFailedException("A data de criação da transação é obrigatória. Data e hora maiores que o momento atual não são permitidos.");
+            throw new EntityCreateFailedException("A data/hora de criação da transação é obrigatória. Data e hora maiores que data atual não são permitidos.");
         }
 
         return new TransactionItauResponseDTO(

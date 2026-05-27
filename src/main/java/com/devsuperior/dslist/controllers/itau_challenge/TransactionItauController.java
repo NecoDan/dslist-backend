@@ -35,12 +35,12 @@ public class TransactionItauController {
     @DeleteMapping(value = "/v1/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") String id) {
         transactionItauService.deleteById(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping(value = "/v1/")
     public ResponseEntity<Void> deleteAll() {
         transactionItauService.deleteAll();
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 }
