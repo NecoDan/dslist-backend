@@ -2,7 +2,7 @@ package com.devsuperior.dslist.config.database;
 
 import lombok.Generated;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cache.Cache;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +20,8 @@ import java.time.Duration;
 
 @EnableCaching
 @Configuration
-@Profile("!test")
+@ConditionalOnProperty(name = "app.redis.enabled", havingValue = "true", matchIfMissing = false)
+@Profile({"!test", "!itau"})
 @Slf4j
 @Generated
 public class RedisCacheConfig {

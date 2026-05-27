@@ -12,9 +12,8 @@ import java.math.BigDecimal;
 
 
 @Repository
-@Qualifier("UserJpaRepository")
+@Qualifier("userJpaRepository")
 public interface UserRepository extends JpaRepository<User, Long> {
-
 
     @Query("select obj from User obj where obj.salary >= :minSalary and obj.salary <= :maxSalary")
     Page<User> findAllBySalary(BigDecimal minSalary, BigDecimal maxSalary, Pageable pageable);

@@ -13,4 +13,6 @@ public interface TransactionItauPort {
     Optional<TransactionItau> getByIdInMemory(String transactionId);
 
     void deleteByIdInMemory(final String transactionId);
+
+    void deleteAll();
 }

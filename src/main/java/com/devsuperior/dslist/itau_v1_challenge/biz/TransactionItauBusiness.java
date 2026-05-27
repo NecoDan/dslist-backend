@@ -5,12 +5,10 @@ import com.devsuperior.dslist.exceptions.TransactionItauNotFoundException;
 import com.devsuperior.dslist.itau_v1_challenge.domain.TransactionItau;
 import com.devsuperior.dslist.itau_v1_challenge.ports.TransactionItauPort;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Component
 @RequiredArgsConstructor
@@ -50,5 +48,14 @@ public class TransactionItauBusiness implements TransactionItauPort {
                 );
 
         this.transactionItauList.removeIf(transactionItau -> transactionId.equals(transactionItau.getId()));
+    }
+
+    @Override
+    public void deleteAll() {
+        if (CollectionUtils.isEmpty(this.transactionItauList)) {
+            throw new TransactionItauNotFoundException("Nenhuma transação encontrada para ser deletada.");
+        }
+
+        this.transactionItauList.clear();
     }
 }
