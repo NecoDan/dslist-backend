@@ -1,20 +1,16 @@
 package com.devsuperior.dslist.picpay_challenge.adapter;
 
-import ch.qos.logback.core.testUtil.MockInitialContextFactory;
 import com.devsuperior.dslist.picpay_challenge.domain.User;
 import com.devsuperior.dslist.picpay_challenge.dto.external.NotificationDTO;
 import com.devsuperior.dslist.picpay_challenge.ports.NotificationPicPayPort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import javax.management.remote.NotificationResult;
 import java.net.URI;
 import java.util.Collections;
 import java.util.UUID;
