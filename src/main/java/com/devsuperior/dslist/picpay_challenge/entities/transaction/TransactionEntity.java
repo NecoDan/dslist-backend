@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.beans.BeanUtils;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -18,6 +19,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class TransactionEntity implements Serializable {
+
+    @Serial private static final long serialVersionUID = -8833417529045805652L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

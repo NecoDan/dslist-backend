@@ -1,12 +1,11 @@
 package com.devsuperior.dslist.itau_v1_challenge.dto.internal;
 
 import com.devsuperior.dslist.itau_v1_challenge.domain.TransactionItau;
-import com.devsuperior.dslist.picpay_challenge.domain.Transaction;
-import com.devsuperior.dslist.picpay_challenge.dto.internal.UserResponseDTO;
 import com.devsuperior.dslist.utils.FunctionalUtils;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
@@ -15,11 +14,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
-import org.springframework.data.mapping.model.PropertyNameFieldNamingStrategy;
 
+import java.io.Serial;
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 @NoArgsConstructor
@@ -28,8 +25,10 @@ import java.util.Objects;
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
-@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class TransactionItauResponseDTO implements Serializable {
+
+    @Serial private static final long serialVersionUID = 3330527215775191375L;
 
     @JsonProperty("id")
     private String id;

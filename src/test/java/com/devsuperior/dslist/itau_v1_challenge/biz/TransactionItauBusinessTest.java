@@ -4,6 +4,7 @@ import com.devsuperior.dslist.exceptions.TransactionItauNotFoundException;
 import com.devsuperior.dslist.itau_v1_challenge.domain.TransactionItau;
 import org.junit.jupiter.api.Test;
 
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -73,5 +74,59 @@ class TransactionItauBusinessTest {
         assertThrows(TransactionItauNotFoundException.class,
                 () -> business.deleteByIdInMemory(UUID.randomUUID().toString())
         );
+    }
+
+    @Test
+    void getTransactionsByDateTimeInMemoryShouldReturnTransactionsWithinDateRange() {
+        // -- 01_Cenário
+        final var transactionItauBusiness = new TransactionItauBusiness();
+
+        final var transaction1 = new TransactionItau();
+        transaction1.setCreatedAt(OffsetDateTime.now().minusDays(1).toLocalDateTime());
+
+        final var transaction2 = new TransactionItau();
+        transaction2.setCreatedAt(OffsetDateTime.now().minusHours(1).toLocalDateTime());
+        transactionItauBusiness.createTransactionInMemory(transaction1);
+        transactionItauBusiness.createTransactionInMemory(transaction2);
+
+        final var filtroOffsetDateTime = OffsetDateTime.now().minusDays(2);
+
+        // -- 02_Ação
+        var result = transactionItauBusiness.getTransactionsByDateTimeInMemory(filtroOffsetDateTime);
+
+        // -- 03_Verificação_Validação
+        assertEquals(2, result.size());
+    }
+
+    @Test
+    void getTransactionsByDateTimeInMemoryShouldReturnEmptyWhenNoTransactionsInRange() {
+        // -- 01_Cenário
+        final var transactionItauBusiness = new TransactionItauBusiness();
+
+        final var transaction = new TransactionItau();
+        final var dtCriacao = OffsetDateTime.now().minusDays(3).toLocalDateTime();
+
+        transaction.setCreatedAt(dtCriacao);
+        transactionItauBusiness.createTransactionInMemory(transaction);
+
+        final var filtroOffsetDateTime = OffsetDateTime.now().minusDays(1);
+
+        // -- 02_Ação
+        var result = transactionItauBusiness.getTransactionsByDateTimeInMemory(filtroOffsetDateTime);
+
+        // -- 03_Verificação_Validação
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    void getTransactionsByDateTimeInMemoryShouldReturnEmptyWhenNoTransactionsExist() {
+        // -- 01_Cenário
+        final var transactionItauBusiness = new TransactionItauBusiness();
+
+        // -- 02_Ação
+        var result = transactionItauBusiness.getTransactionsByDateTimeInMemory(OffsetDateTime.now());
+
+        // -- 03_Verificação_Validação
+        assertTrue(result.isEmpty());
     }
 }

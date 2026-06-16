@@ -3,6 +3,7 @@ package com.devsuperior.dslist.itau_v1_challenge.service;
 import com.devsuperior.dslist.exceptions.EntityCreateFailedException;
 import com.devsuperior.dslist.exceptions.TransactionItauNotFoundException;
 import com.devsuperior.dslist.itau_v1_challenge.domain.TransactionItau;
+import com.devsuperior.dslist.itau_v1_challenge.dto.internal.StatisticsItauResponseDTO;
 import com.devsuperior.dslist.itau_v1_challenge.dto.internal.TransactionItauResponseDTO;
 import com.devsuperior.dslist.itau_v1_challenge.dto.request.TransactionItauRequestDTO;
 import com.devsuperior.dslist.itau_v1_challenge.ports.TransactionItauPort;
@@ -11,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.List;
 
@@ -22,6 +24,8 @@ public class TransactionItauService {
     private final TransactionItauPort transactionItauPort;
 
     public List<TransactionItauResponseDTO> getAll() {
+        log.info("Inicializando a busca todas as transações existentes.");
+
         return transactionItauPort.getAllTransactionsInMemory()
                 .stream()
                 .map(TransactionItauResponseDTO::new)
@@ -54,6 +58,8 @@ public class TransactionItauService {
     }
 
     public TransactionItauResponseDTO getById(final String transactionId) {
+        log.info("Inicializando busca transação por meio do id da transação. Id da transação: {}", transactionId);
+
         return new TransactionItauResponseDTO(
                 transactionItauPort.getByIdInMemory(transactionId)
                         .orElseThrow(() ->
@@ -64,11 +70,30 @@ public class TransactionItauService {
         );
     }
 
+    public List<TransactionItauResponseDTO> getAllTransactionsByRange(Integer secondsRange) {
+        log.info("Inicializando busca de todas as transações por meio do período. Intervalo em segundos: {}", secondsRange);
+
+        var dateTimeRange = OffsetDateTime.now().minusSeconds(secondsRange);
+        var transactionItauList = transactionItauPort.getTransactionsByDateTimeInMemory(dateTimeRange);
+
+        if (transactionItauList.isEmpty()) {
+            log.error("Não foram encontradas transações para o intervalo de %d segundos.".formatted(secondsRange));
+            throw new TransactionItauNotFoundException("Não foram encontradas transações para o intervalo de %d segundos.".formatted(secondsRange));
+        }
+
+        return transactionItauList
+                .stream()
+                .map(TransactionItauResponseDTO::new)
+                .toList();
+    }
+
     public void deleteById(final String transactionId) {
+        log.info("Inicializando exclusão transação por meio do id da transação. Id da transação: {}", transactionId);
         transactionItauPort.deleteByIdInMemory(transactionId);
     }
 
     public void deleteAll() {
+        log.info("Inicializando a exclusão todas as transações existentes.");
         transactionItauPort.deleteAll();
     }
 }
