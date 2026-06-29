@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -15,6 +16,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 public class Transaction implements Serializable {
+
+    @Serial private static final long serialVersionUID = -3157259025497473548L;
 
     private Long id;
     private BigDecimal amount;

@@ -1,18 +1,20 @@
 package com.devsuperior.dslist.emprestimos_challenge.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.apache.commons.lang3.StringUtils;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
-@Getter
-public class Customer {
+@Data
+@Builder
+public class Customer implements Serializable {
+
+    @Serial private static final long serialVersionUID = -4575723883575630710L;
 
     private Integer age;
     private String cpf;
@@ -38,11 +40,17 @@ public class Customer {
 
     public boolean isAgeLowerThan(Integer age) {
         return Objects.nonNull(age)
-                && Objects.nonNull(this.age)
+                && isAgeValid()
                 && this.age < age;
     }
 
+    private boolean isAgeValid() {
+        return Objects.nonNull(this.age) && this.age > 0;
+    }
+
     public boolean isFromLocation(String locationParam) {
-        return Objects.nonNull(this.location) && this.location.equalsIgnoreCase(locationParam);
+        return StringUtils.isNoneEmpty(locationParam)
+                && StringUtils.isNoneEmpty(this.location)
+                && this.location.equalsIgnoreCase(locationParam);
     }
 }

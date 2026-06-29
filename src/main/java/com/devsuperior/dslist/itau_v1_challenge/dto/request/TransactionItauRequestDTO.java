@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -19,6 +20,8 @@ import java.time.OffsetDateTime;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class TransactionItauRequestDTO implements Serializable {
+
+    @Serial private static final long serialVersionUID = 4960068207807312385L;
 
     @JsonProperty("valor")
     private BigDecimal amount;
