@@ -2,6 +2,7 @@ package com.devsuperior.dslist.controllers.users_jpa;
 
 import com.devsuperior.dslist.users_jpa.dto.UserDTO;
 import com.devsuperior.dslist.users_jpa.ports.UserPort;
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
@@ -15,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/users")
 @RequiredArgsConstructor
+@Hidden
 public class UserController {
 
     private final UserPort userPort;

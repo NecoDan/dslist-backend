@@ -3,6 +3,7 @@ package com.devsuperior.dslist.controllers.itau_challenge;
 import com.devsuperior.dslist.itau_v1_challenge.dto.internal.TransactionItauResponseDTO;
 import com.devsuperior.dslist.itau_v1_challenge.dto.request.TransactionItauRequestDTO;
 import com.devsuperior.dslist.itau_v1_challenge.service.TransactionItauService;
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -16,6 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/itau/transactions")
 @RequiredArgsConstructor
+@Hidden
 public class TransactionItauController {
 
     private final TransactionItauService transactionItauService;

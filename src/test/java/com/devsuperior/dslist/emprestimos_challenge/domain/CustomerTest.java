@@ -2,13 +2,77 @@ package com.devsuperior.dslist.emprestimos_challenge.domain;
 
 
 import com.devsuperior.dslist.emprestimos_challenge.util.LoanChallengeFactory;
+import com.devsuperior.dslist.utils.enums.TipoEstado;
+import org.apache.commons.lang3.RandomUtils;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class CustomerTest {
+
+    @Test
+    void shoulCreateInstanceCustomerValidByBuild(){
+
+        var customer = Customer.builder()
+                .cpf("85788718040")
+                .name("Marcos Aurelio Costa")
+                .income(BigDecimal.valueOf(RandomUtils.secure().randomDouble(100.0, 1000.0)))
+                .age(RandomUtils.secureStrong().randomInt(10, 100))
+                .location(TipoEstado.AM.getCodigo())
+                .build();
+
+        assertNotNull(customer);
+        assertNotNull(customer.getAge());
+        assertNotNull(customer.getCpf());
+        assertNotNull(customer.getName());
+        assertNotNull(customer.getIncome());
+        assertNotNull(customer.getLocation());
+    }
+
+    @Test
+    void shouldReturnTrueWhenIncomeIsGreaterThanValue() {
+        final var customer = LoanChallengeFactory.createCustomerWithIncome(BigDecimal.valueOf(8000.00));
+        final var valueToCompare = new BigDecimal("5000.00");
+
+        assertThat(customer.isIncomeEqualOrGreaterThan(valueToCompare))
+                .isTrue();
+    }
+
+    @Test
+    void shouldReturnFalseWhenIncomeIsEqualGreaterToValue() {
+        final var customer = LoanChallengeFactory.createCustomerWithIncome(BigDecimal.valueOf(3000.00));
+        BigDecimal valueToCompare = new BigDecimal("3000.00");
+
+        assertThat(customer.isIncomeEqualOrGreaterThan(valueToCompare))
+                .isTrue();
+    }
+
+    @Test
+    void shouldReturnFalseWhenIncomeIsGreaterThanValue() {
+        final var customer = LoanChallengeFactory.createCustomerWithIncome(BigDecimal.valueOf(1000.00));
+        BigDecimal valueToCompare = new BigDecimal("20000.00");
+
+        assertThat(customer.isIncomeEqualOrGreaterThan(valueToCompare))
+                .isFalse();
+    }
+
+    @Test
+    void shouldReturnFalseWhenParamValueIsNullV1() {
+        final var customer = LoanChallengeFactory.createCustomerWithIncome(BigDecimal.valueOf(2000.00));
+        assertThat(customer.isIncomeEqualOrGreaterThan(null))
+                .isFalse();
+    }
+
+    @Test
+    void shouldReturnFalseWhenCustomerIncomeIsNullV1() {
+        final var customer = LoanChallengeFactory.createCustomerWithIncome(null);
+        BigDecimal valueToCompare = new BigDecimal("8000.00");
+
+        assertThat(customer.isIncomeEqualOrGreaterThan(valueToCompare)).isFalse();
+    }
 
     @Test
     void shouldReturnTrueWhenIncomeIsLowerThanValue() {
@@ -20,16 +84,16 @@ class CustomerTest {
     }
 
     @Test
-    void shouldReturnFalseWhenIncomeIsEqualToValue() {
+    void shouldReturnTrueWhenIncomeIsEqualToValue() {
         final var customer = LoanChallengeFactory.createCustomerWithIncome(BigDecimal.valueOf(2000.00));
         BigDecimal valueToCompare = new BigDecimal("2000.00");
 
         assertThat(customer.isIncomeEqualOrLowerThan(valueToCompare))
-                .isFalse();
+                .isTrue();
     }
 
     @Test
-    void shouldReturnFalseWhenIncomeIsGreaterThanValue() {
+    void shouldReturnFalseWhenIncomeIsThanValue() {
         final var customer = LoanChallengeFactory.createCustomerWithIncome(BigDecimal.valueOf(2500.00));
         BigDecimal valueToCompare = new BigDecimal("2000.00");
 

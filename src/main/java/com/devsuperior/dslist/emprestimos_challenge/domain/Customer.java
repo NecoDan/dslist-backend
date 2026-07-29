@@ -27,7 +27,11 @@ public class Customer implements Serializable {
     }
 
     public boolean isIncomeEqualOrLowerThan(BigDecimal value) {
-        return Objects.nonNull(value) && isIncomeValid() && income.compareTo(value) < 0;
+        return Objects.nonNull(value) && isIncomeValid() && income.doubleValue() <= value.doubleValue();
+    }
+
+    public boolean isIncomeEqualOrGreaterThan(BigDecimal value) {
+        return Objects.nonNull(value) && isIncomeValid() && income.doubleValue() >= value.doubleValue();
     }
 
     public boolean isIncomeBetween(BigDecimal minValue, BigDecimal maxValue) {

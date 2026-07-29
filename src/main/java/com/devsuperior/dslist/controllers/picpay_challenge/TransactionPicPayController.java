@@ -3,6 +3,7 @@ package com.devsuperior.dslist.controllers.picpay_challenge;
 import com.devsuperior.dslist.picpay_challenge.dto.internal.TransactionResponseDTO;
 import com.devsuperior.dslist.picpay_challenge.dto.request.TransactionRequestDTO;
 import com.devsuperior.dslist.picpay_challenge.service.TransactionService;
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/picpay/transactions")
 @RequiredArgsConstructor
+@Hidden
 public class TransactionPicPayController    {
 
     private final TransactionService transactionService;

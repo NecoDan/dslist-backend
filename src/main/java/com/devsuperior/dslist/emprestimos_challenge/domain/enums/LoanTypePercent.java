@@ -8,9 +8,9 @@ public enum LoanTypePercent {
 
     PERSONAL_PERCENT(LoanType.PERSONAL, 4.0),
 
-    GUARANTEED_PERCENT(LoanType.GUARANTEED, 0.0),
+    GUARANTEED_PERCENT(LoanType.GUARANTEED, 3.0),
 
-    CONSIGNMENT_PERCENT(LoanType.CONSIGNMENT, 0.0);
+    CONSIGNMENT_PERCENT(LoanType.CONSIGNMENT, 2.0);
 
     private final Double percent;
     private final LoanType loanType;

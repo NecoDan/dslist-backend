@@ -3,6 +3,7 @@ package com.devsuperior.dslist.utils.enums;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Random;
 import java.util.stream.Stream;
 
 @Getter
@@ -38,6 +39,7 @@ public enum TipoEstado {
 
     private final String codigo;
     private final String nome;
+    private static final Random RANDOM = new Random();
 
     TipoEstado(String codigo, String nome) {
         this.codigo = codigo;
@@ -50,9 +52,16 @@ public enum TipoEstado {
 
     public static TipoEstado of(String codigo) {
         return getStreamValues()
-                .filter(tipoEstado -> StringUtils.equals(tipoEstado.getCodigo(), codigo.toUpperCase()))
+                .filter(tipoEstado -> tipoEstado.getCodigo().equals(codigo.toUpperCase()))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Código inválido e/ou inexistente para o TipoEstado."));
+    }
+
+    public static TipoEstado randomTipoEstado(){
+        return getStreamValues()
+                .skip((int) (Math.random() * getStreamValues().count()))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Não foi possível gerar um TipoEstado aleatório."));
     }
 
     private static Stream<TipoEstado> getStreamValues() {

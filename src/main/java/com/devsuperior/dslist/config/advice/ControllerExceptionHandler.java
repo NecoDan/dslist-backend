@@ -5,8 +5,11 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.Objects;
 
 @RestControllerAdvice
 public class ControllerExceptionHandler {
@@ -17,6 +20,19 @@ public class ControllerExceptionHandler {
         return ResponseEntity.badRequest()
                 .body(ExceptionHandlerDTO.builder()
                         .message(String.format("Erro ao cadastrar usuário ou usuário já cadastrado: %s.", exception.getMessage()))
+                        .httpStatus(HttpStatus.BAD_REQUEST)
+                        .build()
+                );
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity threatArgumentNotValidExceptionBodyRequest(MethodArgumentNotValidException exception) {
+
+        final var field = Objects.requireNonNull(exception.getBindingResult().getFieldError()).getField();
+
+        return ResponseEntity.badRequest()
+                .body(ExceptionHandlerDTO.builder()
+                        .message(String.format("Campo inválido e/ou inexistente (null): %s", field))
                         .httpStatus(HttpStatus.BAD_REQUEST)
                         .build()
                 );

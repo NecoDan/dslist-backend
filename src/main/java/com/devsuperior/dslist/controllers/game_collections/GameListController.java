@@ -1,24 +1,20 @@
 package com.devsuperior.dslist.controllers.game_collections;
 
-import java.util.List;
-
-import com.devsuperior.dslist.game_collections.ports.GameListPort;
-import com.devsuperior.dslist.game_collections.ports.GamePort;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.devsuperior.dslist.game_collections.dto.GameListDTO;
 import com.devsuperior.dslist.game_collections.dto.GameMinDTO;
 import com.devsuperior.dslist.game_collections.dto.ReplacementDTO;
+import com.devsuperior.dslist.game_collections.ports.GameListPort;
+import com.devsuperior.dslist.game_collections.ports.GamePort;
+import io.swagger.v3.oas.annotations.Hidden;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/lists")
 @RequiredArgsConstructor
+@Hidden
 public class GameListController {
 
     private final GameListPort gameListPort;

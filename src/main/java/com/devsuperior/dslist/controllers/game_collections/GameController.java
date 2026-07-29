@@ -4,6 +4,7 @@ import com.devsuperior.dslist.game_collections.dto.GameDTO;
 import com.devsuperior.dslist.game_collections.dto.GameMinDTO;
 import com.devsuperior.dslist.game_collections.dto.GameMinReportDTO;
 import com.devsuperior.dslist.game_collections.ports.GamePort;
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
@@ -18,6 +19,7 @@ import java.util.List;
 @RequestMapping(value = "/games")
 @RequiredArgsConstructor
 @Slf4j
+@Hidden
 public class GameController {
 
     private final GamePort gamePort;

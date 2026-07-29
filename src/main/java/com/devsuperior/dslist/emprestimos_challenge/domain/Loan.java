@@ -1,8 +1,10 @@
 package com.devsuperior.dslist.emprestimos_challenge.domain;
 
 
+import com.devsuperior.dslist.emprestimos_challenge.domain.enums.LoanType;
 import com.devsuperior.dslist.emprestimos_challenge.domain.enums.LoanTypePercent;
 import com.devsuperior.dslist.exceptions.LoanNotAvailableException;
+import com.devsuperior.dslist.utils.enums.TipoEstado;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,27 +23,71 @@ public class Loan implements Serializable {
 
     @Serial private static final long serialVersionUID = 1666768725052453109L;
 
-    private static final double VALOR_TRES_MIL = 3000.0D;
-    private static final double VALOR_CINCO_MIL = 5000.0D;
+    private static final double VALOR_TRES_MIL = 3000.00D;
+    private static final double VALOR_CINCO_MIL = 5000.00D;
 
     private Customer customer;
     private LoanTypePercent loanTypePercent;
+    private LoanType loanType;
+    private Double interestRate;
 
     private boolean isCustomerValid() {
         return Objects.nonNull(this.customer);
     }
 
+    public Loan(Loan loan) {
+        this.customer = loan.getCustomer();
+        this.loanTypePercent = loan.getLoanTypePercent();
+        this.loanType = loan.getLoanType();
+        this.interestRate = loan.getInterestRate();
+    }
+
+    public Loan toAvailableLoansPersonal() {
+        if (isPersonalLoanAvailable()) {
+            this.loanType = LoanType.PERSONAL;
+            this.interestRate = getPersonalLoanInterestRate();
+        }
+        return this;
+    }
+
+    public Loan toAvailableLoansConsignment() {
+        if (isConsignmentLoanAvailable()) {
+            this.loanType = LoanType.CONSIGNMENT;
+            this.interestRate = LoanTypePercent.CONSIGNMENT_PERCENT.getPercent();
+        }
+        return this;
+    }
+
+    public Loan toAvaliableLoansGuaranteed() {
+        if (isGuaranteedLoanAvailable()) {
+            this.loanType = LoanType.GUARANTEED;
+            this.interestRate = LoanTypePercent.GUARANTEED_PERCENT.getPercent();
+        }
+        return this;
+    }
+
     public boolean isPersonalLoanAvailable() {
         return isCustomerValid()
                 && this.customer.isIncomeEqualOrLowerThan(BigDecimal.valueOf(VALOR_TRES_MIL))
-                || isPersonalLoanNotAvailableSecondTerms();
+                || isPersonalOrGuaranteedLoanAvailableSecondTerms();
     }
 
-    public boolean isPersonalLoanNotAvailableSecondTerms() {
+    public boolean isConsignmentLoanAvailable() {
+        return isCustomerValid()
+                && this.customer.isIncomeEqualOrGreaterThan(BigDecimal.valueOf(VALOR_CINCO_MIL));
+    }
+
+    public boolean isGuaranteedLoanAvailable() {
+        return isCustomerValid()
+                && this.customer.isIncomeEqualOrLowerThan(BigDecimal.valueOf(VALOR_TRES_MIL))
+                || isPersonalOrGuaranteedLoanAvailableSecondTerms();
+    }
+
+    public boolean isPersonalOrGuaranteedLoanAvailableSecondTerms() {
         return isCustomerValid()
                 && this.customer.isIncomeBetween(BigDecimal.valueOf(VALOR_TRES_MIL), BigDecimal.valueOf(VALOR_CINCO_MIL))
                 && this.customer.isAgeLowerThan(30)
-                && this.customer.isFromLocation("SP");
+                && this.customer.isFromLocation(TipoEstado.SP.getCodigo());
     }
 
     public double getPersonalLoanInterestRate() {
