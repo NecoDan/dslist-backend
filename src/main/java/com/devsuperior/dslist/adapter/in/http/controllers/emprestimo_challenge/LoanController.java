@@ -1,4 +1,4 @@
-package com.devsuperior.dslist.controllers.emprestimo_challenge;
+package com.devsuperior.dslist.adapter.in.http.controllers.emprestimo_challenge;
 
 import com.devsuperior.dslist.adapter.out.emprestimos.LoanCustomerUseCase;
 import com.devsuperior.dslist.adapter.out.dto.internal.CustomerLoanInput;

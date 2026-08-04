@@ -1,4 +1,4 @@
-package com.devsuperior.dslist.controllers.users_jpa;
+package com.devsuperior.dslist.adapter.in.http.controllers.user_jpa;
 
 import com.devsuperior.dslist.users_jpa.dto.UserDTO;
 import com.devsuperior.dslist.users_jpa.ports.UserPort;

@@ -1,4 +1,4 @@
-package com.devsuperior.dslist.controllers.picpay_challenge;
+package com.devsuperior.dslist.adapter.in.http.controllers.picpay_challenge;
 
 import com.devsuperior.dslist.picpay_challenge.dto.internal.UserResponseDTO;
 import com.devsuperior.dslist.picpay_challenge.dto.request.UserRequestDTO;

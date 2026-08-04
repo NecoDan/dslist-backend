@@ -1,9 +1,9 @@
 package com.devsuperior.dslist.controllers.users_jpa;
 
+import com.devsuperior.dslist.adapter.in.http.controllers.user_jpa.UserController;
 import com.devsuperior.dslist.users_jpa.dto.UserDTO;
 import com.devsuperior.dslist.users_jpa.ports.UserPort;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

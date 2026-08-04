@@ -1,4 +1,4 @@
-package com.devsuperior.dslist.controllers.itau_challenge;
+package com.devsuperior.dslist.adapter.in.http.controllers.itau_challenge;
 
 import com.devsuperior.dslist.itau_v1_challenge.dto.internal.StatisticsItauResponseDTO;
 import com.devsuperior.dslist.itau_v1_challenge.service.StatiticsTransactionItauService;

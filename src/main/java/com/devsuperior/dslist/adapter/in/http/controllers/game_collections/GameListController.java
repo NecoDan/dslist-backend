@@ -1,4 +1,4 @@
-package com.devsuperior.dslist.controllers.game_collections;
+package com.devsuperior.dslist.adapter.in.http.controllers.game_collections;
 
 import com.devsuperior.dslist.game_collections.dto.GameListDTO;
 import com.devsuperior.dslist.game_collections.dto.GameMinDTO;
