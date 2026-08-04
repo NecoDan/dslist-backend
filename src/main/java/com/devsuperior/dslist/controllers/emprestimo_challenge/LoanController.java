@@ -1,8 +1,9 @@
 package com.devsuperior.dslist.controllers.emprestimo_challenge;
 
-import com.devsuperior.dslist.emprestimos_challenge.dto.CustomerLoanRequest;
-import com.devsuperior.dslist.emprestimos_challenge.dto.CustomerLoanResponse;
-import com.devsuperior.dslist.emprestimos_challenge.service.LoanService;
+import com.devsuperior.dslist.adapter.out.emprestimos.LoanCustomerUseCase;
+import com.devsuperior.dslist.adapter.out.dto.internal.CustomerLoanInput;
+import com.devsuperior.dslist.adapter.out.dto.internal.CustomerLoanOutput;
+import com.devsuperior.dslist.utils.logs.MdcUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/loans")
 public class LoanController {
 
-    private final LoanService loanService;
+    private final LoanCustomerUseCase customerUseCase;
 
     @PostMapping(value = "/customer-loans")
     @Operation(summary = "Cria uma nova solicitacao emprestimos", description = "Cria uma nova solicitacao emprestimos disponiveis ao cliente com os dados fornecidos no corpo da requisição.")
@@ -29,7 +30,12 @@ public class LoanController {
             @ApiResponse(responseCode = "400", description = "Requisição inválida"),
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
-    public ResponseEntity<CustomerLoanResponse> customersLoans(@Valid @RequestBody CustomerLoanRequest request) {
-        return ResponseEntity.ok().body(loanService.checkLoanEligibility(request));
+    public ResponseEntity<CustomerLoanOutput> customersLoans(@Valid @RequestBody CustomerLoanInput request) {
+        try {
+            MdcUtils.putTransactionIdRandom();
+            return ResponseEntity.ok().body(customerUseCase.checkCustomerLoanEligibility(request));
+        } finally {
+            MdcUtils.clear();
+        }
     }
 }

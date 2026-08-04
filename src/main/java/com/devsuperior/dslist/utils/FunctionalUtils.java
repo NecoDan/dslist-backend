@@ -16,7 +16,7 @@ public final class FunctionalUtils {
         throw new IllegalStateException("Utility class");
     }
 
-    private final static String BR_DATETIME_FORMAT = "dd/MM/yyyy HH:mm:ss";
+    private static final String BR_DATETIME_FORMAT = "dd/MM/yyyy HH:mm:ss";
 
     private static final Locale PT_BR = new Locale.Builder().setLanguage("pt").setRegion("BR").build();
 
@@ -43,7 +43,7 @@ public final class FunctionalUtils {
         return format.format(value);
     }
 
-    public static String formatCpf(String cpf){
+    public static String formatCpf(String cpf) {
         cpf = cpf.replaceAll("[^0-9]", ""); // Remover caracteres não numéricos
         return cpf.replaceAll("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
     }
