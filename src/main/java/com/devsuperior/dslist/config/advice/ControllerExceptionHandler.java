@@ -62,10 +62,13 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity threatGeneralRuntimeException(RuntimeException exception) {
+        final var strMessageVar1 = exception.getCause().getMessage() != null
+                ? exception.getCause().getMessage()
+                : "Erro desconhecido";
 
         return ResponseEntity.internalServerError()
                 .body(ExceptionHandlerDTO.builder()
-                        .message(exception.getMessage())
+                        .message(strMessageVar1)
                         .httpStatus(HttpStatus.INTERNAL_SERVER_ERROR)
                         .build()
                 );

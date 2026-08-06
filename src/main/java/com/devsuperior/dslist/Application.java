@@ -2,20 +2,22 @@ package com.devsuperior.dslist;
 
 import com.devsuperior.dslist.taxes.services.delivery.PagamentoDeliveryService;
 import com.devsuperior.dslist.utils.objs_complexos.Recipient;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.retry.annotation.EnableRetry;
 
 import java.util.UUID;
 
 @SpringBootApplication
 @EnableFeignClients
+@EnableRetry
+@RequiredArgsConstructor
 public class Application implements CommandLineRunner {
 
-    @Autowired
-    private PagamentoDeliveryService pagamentoDeliveryService;
+    private final PagamentoDeliveryService pagamentoDeliveryService;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
