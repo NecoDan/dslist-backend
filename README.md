@@ -33,6 +33,22 @@ docker-compose up
 - Executar a aplicação Spring Boot
 - Acessar aplicação em `http://localhost:8080`.
 
+---
+
+## 📋 Documentação
+
+Para uma visão completa da modelagem de dados, arquitetura e design patterns utilizados neste projeto, consulte:
+
+📖 **[MODELAGEM.md](docs/modelagem.md)** - Documentação Completa de Modelagem
+
+Este documento inclui:
+- Modelo de dados detalhado de todos os módulos
+- Estrutura de diretórios e componentes
+- Fluxos de dados
+- Padrões de design implementados
+- Configurações importantes
+- Endpoints principais
+
 --- 
 # Itaú Unibanco Desafio Backend Júnior
 
