@@ -49,7 +49,8 @@ Este documento inclui:
 - Configurações importantes
 - Endpoints principais
 
---- 
+---
+
 # Itaú Unibanco Desafio Backend Júnior
 
 Projeto elaborado para solucionar [esse desafio](https://github.com/rafaellins-itau/desafio-itau-vaga-99-junior)
