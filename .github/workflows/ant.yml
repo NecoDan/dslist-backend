@@ -24,3 +24,4 @@ jobs:
         distribution: 'temurin'
     - name: Build with Ant
       run: ant -noinput -buildfile build.xml
+      working-directory: ./github/workflows
