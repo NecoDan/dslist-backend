@@ -12,8 +12,8 @@ import java.util.Locale;
 import java.util.Objects;
 
 public final class FunctionalUtils {
-    private FunctionalUtils() {
-        throw new IllegalStateException("Utility class");
+    private FunctionalUtils(){
+        throw new IllegalStateException("This is a utility class FunctionalUtils and cannot be instantiated");
     }
 
     private static final String BR_DATETIME_FORMAT = "dd/MM/yyyy HH:mm:ss";

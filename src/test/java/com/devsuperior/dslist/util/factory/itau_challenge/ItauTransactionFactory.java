@@ -1,7 +1,7 @@
 package com.devsuperior.dslist.util.factory.itau_challenge;
 
-import com.devsuperior.dslist.itau_v1_challenge.domain.TransactionItau;
-import com.devsuperior.dslist.itau_v1_challenge.dto.request.TransactionItauRequestDTO;
+import com.devsuperior.dslist.itau_v1_challenge.core.domain.TransactionItau;
+import com.devsuperior.dslist.itau_v1_challenge.core.usecase.input.TransactionItauInput;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -21,10 +21,10 @@ public final class ItauTransactionFactory {
                 .build();
     }
 
-    public static TransactionItauRequestDTO buildMockTransactionItauRequestDTO() {
-        return TransactionItauRequestDTO.builder()
-                .amount(BigDecimal.valueOf(100.00))
-                .createdAt(LocalDateTime.now().atOffset(java.time.ZoneOffset.UTC))
-                .build();
+    public static TransactionItauInput buildMockTransactionItauRequestDTO() {
+        return new TransactionItauInput(
+                BigDecimal.valueOf(100.00),
+                LocalDateTime.now().atOffset(java.time.ZoneOffset.UTC)
+        );
     }
 }

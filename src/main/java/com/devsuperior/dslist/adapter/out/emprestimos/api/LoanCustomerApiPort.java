@@ -1,4 +1,4 @@
-package com.devsuperior.dslist.adapter.out.emprestimos;
+package com.devsuperior.dslist.adapter.out.emprestimos.api;
 
 import com.devsuperior.dslist.adapter.out.dto.external.CustomerLoanInputDTO;
 import com.devsuperior.dslist.adapter.out.dto.external.CustomerLoanOutputDTO;

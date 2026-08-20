@@ -1,7 +1,8 @@
 package com.devsuperior.dslist.itau_v1_challenge.biz;
 
 import com.devsuperior.dslist.exceptions.TransactionItauNotFoundException;
-import com.devsuperior.dslist.itau_v1_challenge.domain.TransactionItau;
+import com.devsuperior.dslist.itau_v1_challenge.adapter.out.database.TransactionItauMemoryAdapter;
+import com.devsuperior.dslist.itau_v1_challenge.core.domain.TransactionItau;
 import org.junit.jupiter.api.Test;
 
 import java.time.OffsetDateTime;
@@ -9,12 +10,12 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TransactionItauBusinessTest {
+class TransactionItauMemoryAdapterTest {
 
     @Test
     void createTransactionInMemoryShouldAddTransactionToList() {
         // -- 01_Cenário
-        final var transactionItauBusiness = new TransactionItauBusiness();
+        final var transactionItauBusiness = new TransactionItauMemoryAdapter();
         final var transactionItau = new TransactionItau();
 
         // -- 02_Ação
@@ -28,7 +29,7 @@ class TransactionItauBusinessTest {
     @Test
     void getByIdInMemoryShouldReturnTransactionWhenIdExists() {
         // -- 01_Cenário
-        final var transactionItauBusiness = new TransactionItauBusiness();
+        final var transactionItauBusiness = new TransactionItauMemoryAdapter();
         final var transactionItau = new TransactionItau();
         final var createdTransactionExample = transactionItauBusiness.createTransactionInMemory(transactionItau);
 
@@ -43,7 +44,7 @@ class TransactionItauBusinessTest {
     @Test
     void getByIdInMemoryShouldReturnEmptyWhenIdDoesNotExist() {
         // -- 01_Cenário
-        final var transactionItauBusiness = new TransactionItauBusiness();
+        final var transactionItauBusiness = new TransactionItauMemoryAdapter();
 
         // -- 02_Ação
         var result = transactionItauBusiness.getByIdInMemory(UUID.randomUUID().toString());
@@ -55,7 +56,7 @@ class TransactionItauBusinessTest {
     @Test
     void deleteByIdInMemoryShouldRemoveTransactionWhenIdExists() {
         // -- 01_Cenário
-        final var transactionItauBusiness = new TransactionItauBusiness();
+        final var transactionItauBusiness = new TransactionItauMemoryAdapter();
         final var transactionItau = new TransactionItau();
         final var createdTransactionItauExample = transactionItauBusiness.createTransactionInMemory(transactionItau);
 
@@ -69,7 +70,7 @@ class TransactionItauBusinessTest {
 
     @Test
     void deleteByIdInMemoryShouldThrowExceptionWhenIdDoesNotExist() {
-        TransactionItauBusiness business = new TransactionItauBusiness();
+        TransactionItauMemoryAdapter business = new TransactionItauMemoryAdapter();
 
         assertThrows(TransactionItauNotFoundException.class,
                 () -> business.deleteByIdInMemory(UUID.randomUUID().toString())
@@ -79,7 +80,7 @@ class TransactionItauBusinessTest {
     @Test
     void getTransactionsByDateTimeInMemoryShouldReturnTransactionsWithinDateRange() {
         // -- 01_Cenário
-        final var transactionItauBusiness = new TransactionItauBusiness();
+        final var transactionItauBusiness = new TransactionItauMemoryAdapter();
 
         final var transaction1 = new TransactionItau();
         transaction1.setCreatedAt(OffsetDateTime.now().minusDays(1).toLocalDateTime());
@@ -101,7 +102,7 @@ class TransactionItauBusinessTest {
     @Test
     void getTransactionsByDateTimeInMemoryShouldReturnEmptyWhenNoTransactionsInRange() {
         // -- 01_Cenário
-        final var transactionItauBusiness = new TransactionItauBusiness();
+        final var transactionItauBusiness = new TransactionItauMemoryAdapter();
 
         final var transaction = new TransactionItau();
         final var dtCriacao = OffsetDateTime.now().minusDays(3).toLocalDateTime();
@@ -121,7 +122,7 @@ class TransactionItauBusinessTest {
     @Test
     void getTransactionsByDateTimeInMemoryShouldReturnEmptyWhenNoTransactionsExist() {
         // -- 01_Cenário
-        final var transactionItauBusiness = new TransactionItauBusiness();
+        final var transactionItauBusiness = new TransactionItauMemoryAdapter();
 
         // -- 02_Ação
         var result = transactionItauBusiness.getTransactionsByDateTimeInMemory(OffsetDateTime.now());
