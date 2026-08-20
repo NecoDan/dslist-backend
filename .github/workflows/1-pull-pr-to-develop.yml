@@ -1,6 +1,10 @@
-name: CI - PR para develop
+name: "1 - [FEAT] Build & PR"
 
 on:
+  push:
+    branches:
+      - 'feature**'
+      - 'feat**'
   pull_request:
     branches:
       - develop
