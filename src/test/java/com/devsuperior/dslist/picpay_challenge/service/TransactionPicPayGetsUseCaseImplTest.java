@@ -16,6 +16,7 @@ import org.mockito.MockitoAnnotations;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -40,10 +41,12 @@ class TransactionPicPayGetsUseCaseImplTest {
                 .createdAt(LocalDateTime.now())
                 .receiver(UserPicPay.builder()
                         .id(RandomUtils.secure().randomLong())
+                        .document("12345678900")
                         .balance(BigDecimal.valueOf(RandomUtils.secure().randomDouble()))
                         .build())
                 .sender(UserPicPay.builder()
                         .id(RandomUtils.secure().randomLong())
+                        .document("98765432100")
                         .balance(BigDecimal.valueOf(RandomUtils.secure().randomDouble()))
                         .build())
                 .amount(BigDecimal.valueOf(RandomUtils.secure().randomDouble()))
@@ -100,8 +103,8 @@ class TransactionPicPayGetsUseCaseImplTest {
     @Test
     void getById() {
         // -- 01_Cenário
-        final var transactionVar14 = getBuildTransaction();
-        final var id = transactionVar14.getId();
+        final var transactionVar14 = Optional.of(getBuildTransaction());
+        final var id = transactionVar14.get().getId();
 
         when(transactionPicPayPort.getById(anyLong()))
                 .thenReturn(transactionVar14);
@@ -113,8 +116,8 @@ class TransactionPicPayGetsUseCaseImplTest {
         assertNotNull(result);
         assertInstanceOf(TransactionPicPayOutput.class, result);
 
-        assertNotNull(result.getId());
-        assertInstanceOf(Long.class, result.getId());
-        assertEquals(id, result.getId());
+        assertNotNull(result.id());
+        assertInstanceOf(Long.class, result.id());
+        assertEquals(id, result.id());
     }
 }
