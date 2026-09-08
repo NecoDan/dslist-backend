@@ -77,7 +77,7 @@ Este é um projeto **Spring Boot multifuncional** que implementa soluções para
 - 20+ usuários com diferentes salários (de R$ 1.348,74 a R$ 10.688,93)
 
 **API de Transações:**
-- **POST** `/transaction` - Criar transação
+- **POST** `/transactionPicPay` - Criar transação
   ```json
   {
     "value": 100.0,
@@ -85,7 +85,7 @@ Este é um projeto **Spring Boot multifuncional** que implementa soluções para
     "payee": 2
   }
   ```
-- **GET** `/transaction` - Listar todas as transações
+- **GET** `/transactionPicPay` - Listar todas as transações
   ```json
   {
     "id": 20,
@@ -102,7 +102,7 @@ Este é um projeto **Spring Boot multifuncional** que implementa soluções para
 
 #### Entidades Principais
 
-**Tabela: `picpay.user`** (Usuários PicPay)
+**Tabela: `picpay.userPicPay`** (Usuários PicPay)
 ```
 ┌─ id (bigint, PK, auto-increment)
 ├─ first_name (varchar 255)
@@ -116,18 +116,18 @@ Este é um projeto **Spring Boot multifuncional** que implementa soluções para
 └─ created_at (timestamp)
 ```
 
-**Tabela: `picpay.transaction`** (Transações PicPay)
+**Tabela: `picpay.transactionPicPay`** (Transações PicPay)
 ```
 ┌─ id (bigint, PK, auto-increment)
-├─ sender_id (bigint, FK → picpay.user)
-├─ receiver_id (bigint, FK → picpay.user)
+├─ sender_id (bigint, FK → picpay.userPicPay)
+├─ receiver_id (bigint, FK → picpay.userPicPay)
 ├─ amount (numeric 38,2)
 └─ created_at (timestamp)
 ```
 
 **Constraints:**
-- `FK: transaction.receiver_id → user.id (FKey21a233t8tlwfsbs228q3b2u)`
-- `FK: transaction.sender_id → user.id (FKjpter5yuohdb58gyg6k5nympt)`
+- `FK: transactionPicPay.receiver_id → userPicPay.id (FKey21a233t8tlwfsbs228q3b2u)`
+- `FK: transactionPicPay.sender_id → userPicPay.id (FKjpter5yuohdb58gyg6k5nympt)`
 - **Restrição de tipo:** Apenas usuários COMMON podem receber pagamentos; MERCHANT pode enviar
 - **Validação externa:** Integração com serviço de autorização via OpenFeign
 
@@ -261,8 +261,8 @@ Response JSON
 - `PUT /games/{id}` - Atualizar jogo
 
 ### Itaú v1 Challenge
-- `POST /transaction` - Criar transação
-- `GET /transaction` - Listar transações
+- `POST /transactionPicPay` - Criar transação
+- `GET /transactionPicPay` - Listar transações
 
 ### PicPay Challenge
 - `POST /users` - Criar usuário

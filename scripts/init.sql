@@ -93,7 +93,7 @@ VALUES (CURRENT_TIMESTAMP, 'Sonic CD', 4, 1993, 'Platform', 'Sega CD, PC','https
 -- ############## create table - picpay usuário:
 set schema 'dslistapp';
 
-create table if not exists picpay.user(
+create table if not exists picpay.userPicPay(
     id                serial not null,
     first_name        varchar(255) not null,
     last_name         varchar(255) not null,
@@ -106,13 +106,13 @@ create table if not exists picpay.user(
     primary key (id)
     );
 
-create unique index uq_picpayuser_user on picpay.user (id);
-create unique index uq_picpayuser_document on picpay.user (document);
-create unique index uq_picpayuser_email on picpay.user (email);
+create unique index uq_picpayuser_user on picpay.userPicPay (id);
+create unique index uq_picpayuser_document on picpay.userPicPay (document);
+create unique index uq_picpayuser_email on picpay.userPicPay (email);
 
 -- --------------------------------------------------------------------------------------------------------------------
 -- ############## create table - picpay transações:
-create table if not exists picpay.transaction(
+create table if not exists picpay.transactionPicPay(
     id                serial not null,
     amount            decimal(19,6) default 0 not null,
     sender_id         bigint not null,
@@ -121,25 +121,25 @@ create table if not exists picpay.transaction(
     primary key (id)
     );
 
-create unique index uq_picpay_transaction on picpay.transaction (id);
+create unique index uq_picpay_transaction on picpay.transactionPicPay (id);
 
-alter table picpay.transaction
-    add constraint picpay_transaction_sender_user_id_fkey foreign key (sender_id) references picpay.user (id);
+alter table picpay.transactionPicPay
+    add constraint picpay_transaction_sender_user_id_fkey foreign key (sender_id) references picpay.userPicPay (id);
 
-alter table picpay.transaction
-    add constraint picpay_transaction_receiver_user_id_fkey foreign key (receiver_id) references picpay.user (id);
+alter table picpay.transactionPicPay
+    add constraint picpay_transaction_receiver_user_id_fkey foreign key (receiver_id) references picpay.userPicPay (id);
 
 -- --------------------------------------------------------------------------------------------------------------------
 -- ############## inserts defaults!!!!
 -- usuários:
-INSERT INTO picpay.user (first_name, last_name, document, email, password, balance, user_type, created_at)
+INSERT INTO picpay.userPicPay (first_name, last_name, document, email, password, balance, user_type, created_at)
 VALUES ('João','Perreira','83324444039','joaoperreira@mail.com.br', null, 150.0, 'COMMON', current_timestamp);
 
-INSERT INTO picpay.user (first_name, last_name, document, email, password, balance, user_type, created_at)
+INSERT INTO picpay.userPicPay (first_name, last_name, document, email, password, balance, user_type, created_at)
 VALUES ('Manoel','Silva','64852541027','manoelsilva@mail.com.br', null, 5000.0, 'MERCHANT', current_timestamp);
 
 -- transação:
-INSERT INTO picpay.transaction (amount, sender_id, receiver_id, created_at)
+INSERT INTO picpay.transactionPicPay (amount, sender_id, receiver_id, created_at)
 VALUES (50.20, 1, 2, current_timestamp);
 
 select * from dslistapp.picpay_user;

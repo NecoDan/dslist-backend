@@ -73,7 +73,7 @@ para uma vaga backend com perfil sênior. A solução desenvolvida é basicament
 
 ## API
 
-- http :8080/transaction value=100.0 payer=1 payee=200
+- http :8080/transactionPicPay value=100.0 payer=1 payee=200
 
 ```
 HTTP/1.1 200
@@ -92,7 +92,7 @@ Transfer-Encoding: chunked
 }
 ```
 
-- http :8080/transaction
+- http :8080/transactionPicPay
 
 ```
 HTTP/1.1 200
