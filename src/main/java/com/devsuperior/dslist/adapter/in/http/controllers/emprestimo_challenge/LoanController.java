@@ -1,8 +1,8 @@
 package com.devsuperior.dslist.adapter.in.http.controllers.emprestimo_challenge;
 
-import com.devsuperior.dslist.adapter.out.emprestimos.LoanCustomerUseCase;
-import com.devsuperior.dslist.adapter.out.dto.internal.CustomerLoanInput;
-import com.devsuperior.dslist.adapter.out.dto.internal.CustomerLoanOutput;
+import com.devsuperior.dslist.core.usecase.emprestimo_challenge.LoanCustomerUseCase;
+import com.devsuperior.dslist.adapter.out.dto.internal.emprestimos.CustomerLoanInput;
+import com.devsuperior.dslist.adapter.out.dto.internal.emprestimos.CustomerLoanOutput;
 import com.devsuperior.dslist.utils.logs.MdcUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

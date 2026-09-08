@@ -1,7 +1,7 @@
 package com.devsuperior.dslist.adapter.in.http.controllers.user_jpa;
 
-import com.devsuperior.dslist.users_jpa.dto.UserDTO;
-import com.devsuperior.dslist.users_jpa.ports.UserPort;
+import com.devsuperior.dslist.core.domain.user_jpa.UserDTO;
+import com.devsuperior.dslist.core.ports.user_jpa.UserPort;
 import io.swagger.v3.oas.annotations.Hidden;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;

@@ -1,7 +1,7 @@
 package com.devsuperior.dslist.adapter.out.client.feign;
 
-import com.devsuperior.dslist.adapter.out.dto.external.CustomerLoanInputDTO;
-import com.devsuperior.dslist.adapter.out.dto.external.CustomerLoanOutputDTO;
+import com.devsuperior.dslist.adapter.out.dto.external.emprestimos.CustomerLoanInputDTO;
+import com.devsuperior.dslist.adapter.out.dto.external.emprestimos.CustomerLoanOutputDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
