@@ -1,5 +1,7 @@
 package com.devsuperior.dslist.utils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
@@ -19,6 +21,24 @@ public final class FunctionalUtils {
     private static final String BR_DATETIME_FORMAT = "dd/MM/yyyy HH:mm:ss";
 
     private static final Locale PT_BR = new Locale.Builder().setLanguage("pt").setRegion("BR").build();
+
+    private static final ObjectMapper MAPPER = new ObjectMapper();
+
+    /**
+     * Converte um objeto para uma string JSON.
+     *
+     * @param object O objeto a ser convertido.
+     * @return Uma string JSON representando o objeto fornecido.
+     */
+    public static String toStringJsonFrom(Object object) {
+        try {
+            return MAPPER.writeValueAsString(object);
+        } catch (JsonProcessingException e) {
+            final var errorMessage = "Failed create e/or convert to JSON string object by value: %s".formatted(e.getMessage());
+            System.out.printf(errorMessage);
+            throw new IllegalStateException(errorMessage);
+        }
+    }
 
     public static String formatCreationDate(LocalDateTime localDateTime) {
         return (Objects.isNull(localDateTime)) ? StringUtils.EMPTY : formatCreationDateBy(localDateTime);
